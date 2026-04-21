@@ -206,7 +206,8 @@ docker exec -it laravel_php_desktop bash
 cp .env.example .env
 composer install
 php artisan key:generate
-chmod -R 775 storage bootstrap/cache
+chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 exit
 ```
 
