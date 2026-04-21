@@ -72,22 +72,37 @@ FROM php:8.4-fpm
 
 WORKDIR /var/www
 
+# Install dependensi sistem + Node.js 20.x LTS
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
     libzip-dev \
-    zip unzip git curl \
+    zip \
+    unzip \
+    git \
+    curl \
+    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install pdo pdo_mysql zip gd \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Verifikasi instalasi Node.js (opsional)
+RUN node -v && npm -v
+
+# Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Copy seluruh kode aplikasi
 COPY . .
 
+# Set permission untuk folder storage dan cache
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
 EXPOSE 9000
+EXPOSE 5173  # Port untuk Vite dev server
+
 CMD ["php-fpm"]
 ```
 
@@ -99,12 +114,13 @@ CMD ["php-fpm"]
 version: '3.8'
 
 services:
+  # Layanan 1: Web Server (Nginx)
   webserver:
     image: nginx:alpine
     container_name: laravel_nginx_desktop
     restart: unless-stopped
     ports:
-      - "80:80"
+      - "80:80" # Port di Komputer : Port di Container
     volumes:
       - .:/var/www
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
@@ -113,6 +129,7 @@ services:
     networks:
       - laravel_net
 
+  # Layanan 2: PHP Processor (Aplikasi Laravel)
   app:
     build:
       context: .
@@ -127,6 +144,7 @@ services:
     networks:
       - laravel_net
 
+  # Layanan 3: Database (MySQL)
   db:
     image: mysql:8.0
     container_name: laravel_mysql_desktop
@@ -137,11 +155,22 @@ services:
       MYSQL_PASSWORD: rahasia123
       MYSQL_ROOT_PASSWORD: root_password_kuat
     ports:
-      - "3307:3306"
+      - "3307:3306" # Gunakan port 3307 agar tidak bentrok dengan MySQL lokal di Windows/Mac
     volumes:
       - db_data_desktop:/var/lib/mysql
     networks:
       - laravel_net
+
+  # Layanan 4: Vite (Frontend Development)
+  vite:
+    image: node:20
+    container_name: laravel_vite_desktop
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+    ports:
+      - "5173:5173"
+    command: sh -c "sleep infinity"
 
 networks:
   laravel_net:
@@ -150,6 +179,7 @@ networks:
 volumes:
   db_data_desktop:
     driver: local
+
 ```
 
 ---
