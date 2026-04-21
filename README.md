@@ -396,4 +396,4 @@ Proyek ini digunakan untuk pengembangan internal MARKASAssistant.
 
 ---
 
-<p align="center">Dibuat dengan ❤️ menggunakan Laravel & Docker</p>
+<p align="center">Dibuat dengan ❤️ Oleh Ricky C.A.T menggunakan Laravel & Docker</p>
