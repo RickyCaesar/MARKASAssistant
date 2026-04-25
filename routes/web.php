@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -17,8 +19,12 @@ Route::get('/register', function () {
     return Inertia::render('signup');
 })->name('register');
 
-// Protected Routes (Hanya untuk user login)
-Route::middleware(['auth'])->group(function () {
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Protected Routes (Hanya untuk user login dan terverifikasi)
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard', [
             'user' => Auth::user(),
