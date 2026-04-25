@@ -1,6 +1,14 @@
 import { Link } from "@inertiajs/react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
+import {
+    NavigationMenu,
+    NavigationMenuContent,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList,
+    NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu"
 import { useState } from "react";
 
 export default function Welcome() {
@@ -9,10 +17,35 @@ export default function Welcome() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
             {/* Hero Section */}
+            <header className="bg-slate-800 py-4 px-10 w-full shadow-md flex items-center justify-start">
+                <NavigationMenu>
+                    <NavigationMenuList>
+                        <NavigationMenuItem>
+                            <NavigationMenuTrigger className="bg-transparent text-slate-100 hover:!bg-slate-700 hover:!text-white focus:!bg-slate-700 focus:!text-white data-[active]:!bg-slate-700 data-[active]:!text-white data-[state=open]:!bg-slate-700 data-[state=open]:!text-white text-base">
+                                MARKAS Assistant
+                            </NavigationMenuTrigger>
+                            <NavigationMenuContent>
+                                <ul className="grid w-[200px] gap-1 p-2 bg-slate-800 border-slate-700 rounded-md shadow-lg">
+                                    <li>
+                                        <NavigationMenuLink href="/login" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-700 hover:text-white text-slate-100 focus:bg-slate-700 focus:text-white">
+                                            Login
+                                        </NavigationMenuLink>
+                                    </li>
+                                    <li>
+                                        <NavigationMenuLink href="/register" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-700 hover:text-white text-slate-100 focus:bg-slate-700 focus:text-white">
+                                            Register
+                                        </NavigationMenuLink>
+                                    </li>
+                                </ul>
+                            </NavigationMenuContent>
+                        </NavigationMenuItem>
+                    </NavigationMenuList>
+                </NavigationMenu>
+            </header>
             <div className="max-w-4xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
                 <div className="text-center">
                     <h1 className="text-5xl font-bold text-slate-900 mb-4">
-                        🚀 MARKASAssistant
+                        🚀 MARKAS Assistant
                     </h1>
                     <p className="text-xl text-slate-600 mb-8">
                         Your ultimate assistant with shadcn/ui components

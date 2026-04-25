@@ -111,6 +111,7 @@ CMD ["php-fpm"]
 #### 📄 docker-compose.yml
 
 ```yaml
+
 version: '3.8'
 
 services:
@@ -170,7 +171,9 @@ services:
       - .:/var/www
     ports:
       - "5173:5173"
-    command: sh -c "sleep infinity"
+    networks:
+      - laravel_net
+    command: sh -c "npm install && npm run dev -- --host"
 
 networks:
   laravel_net:
