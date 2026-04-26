@@ -9,9 +9,9 @@ const appName = import.meta.env.VITE_APP_NAME || 'MARKASAssistant';
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => resolvePageComponent(
-        `./Pages/${name}.tsx`,
-        import.meta.glob('./Pages/**/*.tsx')
-    ),
+        `./pages/${name}.tsx`,
+        import.meta.glob('./pages/**/*.tsx')
+    ) as Promise<React.ComponentType>,
     setup({ el, App, props }) {
         const root = createRoot(el);
         root.render(<App {...props} />);

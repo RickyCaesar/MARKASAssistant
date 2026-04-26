@@ -1,6 +1,6 @@
 // resources/js/Pages/Dashboard.tsx
 import { Head } from '@inertiajs/react';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import AuthenticatedLayout from '@/layouts/AuthenticatedLayout';
 
 interface Props {
     user: {
