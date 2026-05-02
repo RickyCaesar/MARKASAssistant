@@ -5,11 +5,13 @@
 # 🚀 MARKASAssistant
 
 [![Laravel](https://img.shields.io/badge/Laravel-13.x-FF2D20?style=flat-square&logo=laravel)](https://laravel.com)
-[![PHP](https://img.shields.io/badge/PHP-8.4-777BB4?style=flat-square&logo=php)](https://php.net)
-[![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=flat-square&logo=mysql)](https://mysql.com)
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react)](https://react.dev)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.0-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com)
+[![Shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-000000?style=flat-square&logo=shadcnui&logoColor=white)](https://ui.shadcn.com)
+[![Vite](https://img.shields.io/badge/Vite-8.0-646CFF?style=flat-square&logo=vite)](https://vitejs.dev)
 [![Docker](https://img.shields.io/badge/Docker-29.x-2496ED?style=flat-square&logo=docker)](https://docker.com)
 
-**MARKASAssistant** adalah aplikasi web berbasis **Laravel 13.x** yang berjalan sepenuhnya di dalam lingkungan **Docker Desktop** menggunakan arsitektur multi-container (Nginx, PHP 8.4-FPM, MySQL 8.0).
+**MARKASAssistant** adalah aplikasi web modern dengan stack **Laravel 13.x** (Backend), **React 19 & Inertia.js** (Frontend), serta berjalan sepenuhnya di dalam lingkungan **Docker Desktop** (Nginx, PHP 8.4-FPM, MySQL 8.0).
 
 ---
 
@@ -17,6 +19,7 @@
 
 - [Prasyarat](#-prasyarat)
 - [Instalasi Cepat](#-instalasi-cepat)
+- [Teknologi & Komponen Frontend](#-teknologi--komponen-frontend)
 - [Struktur Proyek](#-struktur-proyek)
 - [Konfigurasi](#-konfigurasi)
 - [Perintah Sehari-hari](#-perintah-sehari-hari)
@@ -281,6 +284,25 @@ Buka browser dan kunjungi:
 ```
 http://localhost
 ```
+
+---
+
+## 🎨 Teknologi & Komponen Frontend
+
+Aplikasi ini menggunakan ekosistem frontend yang kuat dan modern untuk menghadirkan antarmuka (UI) yang reaktif dan interaktif. Komponen utama yang perlu disiapkan dan dikelola pada layer frontend meliputi:
+
+- **Framework:** [React 19](https://react.dev/) dengan [Inertia.js](https://inertiajs.com/) (Menghubungkan Laravel dengan React tanpa API terpisah).
+- **Styling:** [Tailwind CSS v4.0](https://tailwindcss.com/) untuk utility-first styling.
+- **Komponen UI:** [Shadcn UI](https://ui.shadcn.com/) (Ditenagai oleh Radix UI & Tailwind) yang memungkinkan kustomisasi komponen secara langsung.
+- **Iconography:** [Hugeicons](https://hugeicons.com/) untuk kebutuhan ikon yang konsisten.
+- **Data Table:** [TanStack Table](https://tanstack.com/table/latest) untuk grid data tingkat lanjut.
+- **Grafik / Charting:** [Recharts](https://recharts.org/) untuk visualisasi data dan metrik.
+- **Drag & Drop:** [@dnd-kit](https://dndkit.com/) untuk antarmuka interaktif yang dapat digeser (sortable/draggable).
+- **Validasi Frontend:** [Zod](https://zod.dev/) terintegrasi untuk skema validasi.
+- **Notifikasi:** [Sonner](https://sonner.emilkowal.ski/) untuk komponen toast yang elegan.
+- **Lainnya:** Vaul (Drawer dialog), Next-themes (Dark mode support).
+
+> 💡 **Tip Shadcn:** Karena menggunakan Shadcn UI, komponen terletak secara lokal di source code Anda (misal: `resources/js/components/ui/`) sehingga Anda memiliki kendali penuh untuk menyempurnakan atau mengubah fungsionalitasnya.
 
 ---
 
