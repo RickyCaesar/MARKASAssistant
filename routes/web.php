@@ -11,9 +11,17 @@ Route::get('/', function () {
     return Inertia::render('Welcome');
 })->name('home');
 
-Route::get('/login', function () {
-    return Inertia::render('login');
-})->name('login');
+Route::get('/loginv1', function () {
+    return Inertia::render('auth/Login1');
+})->name('loginv1');
+
+Route::get('/loginv2', function () {
+    return Inertia::render('auth/Login2');
+})->name('loginv2');
+
+Route::get('/loginv3', function () {
+    return Inertia::render('auth/Login3');
+})->name('loginv3');
 
 Route::get('/register', function () {
     return Inertia::render('auth/Signup');

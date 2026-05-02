@@ -16,10 +16,15 @@ import {
 import { Input } from "@/components/ui/input"
 import { Link, useForm } from "@inertiajs/react"
 
+interface LoginFormProps extends React.ComponentProps<"div"> {
+  action?: string
+}
+
 export function LoginForm({
   className,
+  action = '/login',
   ...props
-}: React.ComponentProps<"div">) {
+}: LoginFormProps) {
   const { data, setData, post, processing, errors } = useForm({
     email: '',
     password: '',
@@ -27,7 +32,7 @@ export function LoginForm({
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault()
-    post('/login')
+    post(action)
   }
 
   return (

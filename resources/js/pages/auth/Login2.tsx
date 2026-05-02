@@ -1,5 +1,3 @@
-"use client"
-
 import { LoginForm } from "@/components/login-form"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { LayoutBottomIcon } from "@hugeicons/core-free-icons"
@@ -19,6 +17,7 @@ export default function LoginPage() {
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-xs">
             <LoginForm />
+
           </div>
         </div>
       </div>
