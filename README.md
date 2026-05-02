@@ -407,31 +407,10 @@ docker-compose logs -f db      # Log khusus service database
 
 ---
 
-## 🐛 Troubleshooting
-
-| Masalah | Solusi |
-| ------- | ------ |
-| `invalid reference format` di PowerShell | Gunakan `${PWD}` bukan `$(pwd)` |
-| Port 80 sudah dipakai | Ganti port di `docker-compose.yml` (misal: `"8080:80"`) |
-| Port 3307 sudah dipakai | Ganti port mapping di service `db` |
-| Permission denied pada `storage/` | `docker exec -it laravel_php_desktop chmod -R 775 storage` |
-| Container app gagal start | Cek log: `docker-compose logs app` |
-
----
-
-## 📝 Catatan
-
-- Edit file langsung di folder project (bukan di dalam container), karena volume di-mount secara bind mount
-- Data database tersimpan di Docker volume `db_data_desktop` dan akan persist meski container dihentikan
-- Port MySQL eksternal menggunakan `3307` agar tidak bentrok dengan MySQL lokal
-- File `.env` **tidak** di-commit ke Git (sudah ada di `.gitignore`)
-
----
-
 ## 📄 Lisensi
 
-Proyek ini digunakan untuk pengembangan internal MARKASAssistant.
+Proyek ini digunakan untuk pengembangan internal.
 
 ---
 
-<p align="center">Dibuat dengan ❤️ Oleh Ricky C.A.T menggunakan Laravel & Docker</p>
+<p align="center">Dibuat dengan ❤️ Oleh Ricky C.A.T</p>
