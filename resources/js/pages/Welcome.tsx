@@ -1,7 +1,9 @@
 import { Link } from "@inertiajs/react";
 import StitchLayout from "@/layouts/Stitch";
+import { useState } from "react";
 
 export default function Welcome() {
+    const [loginOpen, setLoginOpen] = useState(false);
     return (
         <StitchLayout>
             {/* Hero Section */}
@@ -23,12 +25,6 @@ export default function Welcome() {
                                 className="bg-[#DF2225] text-white text-base font-bold px-10 py-4 hover:brightness-110 active:scale-95 transition-all text-center"
                             >
                                 Mulai Gratis
-                            </Link>
-                            <Link
-                                href="/login"
-                                className="border border-[#5d3f3c] text-white text-base font-bold px-10 py-4 hover:bg-[#353437] active:scale-95 transition-all text-center"
-                            >
-                                Masuk ke Dashboard
                             </Link>
                         </div>
                     </div>
@@ -198,12 +194,52 @@ export default function Welcome() {
                         >
                             Daftar Sekarang
                         </Link>
-                        <Link
-                            href="/login"
-                            className="border border-white/20 text-white font-bold text-lg px-12 py-5 uppercase tracking-widest hover:bg-white/5 transition-all text-center"
-                        >
-                            Masuk
-                        </Link>
+                        {/* Login Dropdown */}
+                        <div className="relative">
+                            <button
+                                onClick={() => setLoginOpen(prev => !prev)}
+                                className="flex items-center gap-2 border border-white/20 text-white font-bold text-lg px-12 py-5 uppercase tracking-widest hover:bg-white/5 transition-all text-center"
+                            >
+                                Login
+                                <svg
+                                    className={`w-3 h-3 transition-transform duration-200 ${loginOpen ? 'rotate-180' : ''}`}
+                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            {loginOpen && (
+                                <div className="absolute right-0 mt-2 w-44 bg-[#1A1A1E] border border-[#2D2D32] shadow-2xl z-50">
+                                    <div className="px-3 py-1.5 border-b border-[#2D2D32]">
+                                        <span className="text-[10px] tracking-widest uppercase text-gray-500">Select Version</span>
+                                    </div>
+                                    <Link
+                                        href="/loginv1"
+                                        onClick={() => setLoginOpen(false)}
+                                        className="flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-tight text-gray-300 hover:bg-[#DF2225] hover:text-white transition-colors duration-150"
+                                    >
+                                        <span className="text-[#DF2225] text-xs font-black group-hover:text-white">V.1</span>
+                                        Login V.1
+                                    </Link>
+                                    <Link
+                                        href="/loginv2"
+                                        onClick={() => setLoginOpen(false)}
+                                        className="flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-tight text-gray-300 hover:bg-[#DF2225] hover:text-white transition-colors duration-150"
+                                    >
+                                        <span className="text-[#DF2225] text-xs font-black">V.2</span>
+                                        Login V.2
+                                    </Link>
+                                    <Link
+                                        href="/loginv3"
+                                        onClick={() => setLoginOpen(false)}
+                                        className="flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-tight text-gray-300 hover:bg-[#DF2225] hover:text-white transition-colors duration-150"
+                                    >
+                                        <span className="text-[#DF2225] text-xs font-black">V.3</span>
+                                        Login V.3
+                                    </Link>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             </section>

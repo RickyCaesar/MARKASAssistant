@@ -4,10 +4,10 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 
 import '../css/app.css';
 
-const appName = import.meta.env.VITE_APP_NAME || 'MARKASAssistant';
+const appName = import.meta.env.VITE_APP_NAME || 'MARKAS Assistant';
 
 createInertiaApp({
-    title: (title) => `${title} - ${appName}`,
+    title: (title) => title ? `${title} - ${appName}` : appName,
     resolve: (name) => resolvePageComponent(
         `./pages/${name}.tsx`,
         import.meta.glob('./pages/**/*.tsx')

@@ -3,6 +3,7 @@ import { Head, Link } from '@inertiajs/react';
 
 export default function StitchLayout({ children }: PropsWithChildren) {
     const [loginOpen, setLoginOpen] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -31,16 +32,19 @@ export default function StitchLayout({ children }: PropsWithChildren) {
             {/* Top Navigation Bar */}
             <nav className="fixed top-0 w-full z-50 bg-[#0D0D0F] border-b border-[#2D2D32]">
                 <div className="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
-                    <div className="text-xl font-black tracking-tighter text-white uppercase">
-                        MARKAS Assistant
+                    <div className="flex items-center gap-3">
+                        <img src="/icon.png" alt="MARKAS Assistant Logo" className="w-8 h-8 object-contain" />
+                        <div className="text-xl font-black tracking-tighter text-white uppercase">
+                            MARKAS <span className="text-[#DF2225]">Assistant</span>
+                        </div>
                     </div>
-                    <div className="hidden md:flex items-center space-x-8">
+                    <div className="hidden lg:flex items-center space-x-8">
                         <Link className="tracking-tight text-sm uppercase font-bold text-[#DF2225] border-b-2 border-[#DF2225] pb-1" href="/">Home</Link>
                         <Link className="tracking-tight text-sm uppercase font-bold text-gray-400 hover:text-white transition-all duration-200" href="/features">AI Services</Link>
                         <Link className="tracking-tight text-sm uppercase font-bold text-gray-400 hover:text-white transition-all duration-200" href="/features">Features</Link>
                         <Link className="tracking-tight text-sm uppercase font-bold text-gray-400 hover:text-white transition-all duration-200" href="#">Contact</Link>
                     </div>
-                    <div className="flex items-center space-x-4" ref={dropdownRef}>
+                    <div className="hidden lg:flex items-center space-x-4" ref={dropdownRef}>
                         {/* Login Dropdown */}
                         <div className="relative">
                             <button
@@ -88,7 +92,44 @@ export default function StitchLayout({ children }: PropsWithChildren) {
                             )}
                         </div>
                     </div>
+
+                    {/* Mobile Menu Toggle */}
+                    <button
+                        className="lg:hidden text-white hover:text-[#DF2225] transition-colors"
+                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                    >
+                        <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            {mobileMenuOpen ? (
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            ) : (
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                            )}
+                        </svg>
+                    </button>
                 </div>
+
+                {/* Mobile Menu Dropdown */}
+                {mobileMenuOpen && (
+                    <div className="lg:hidden bg-[#0D0D0F] border-b border-[#2D2D32] px-8 py-4 flex flex-col space-y-4">
+                        <Link className="tracking-tight text-sm uppercase font-bold text-[#DF2225]" href="/">Home</Link>
+                        <Link className="tracking-tight text-sm uppercase font-bold text-gray-400 hover:text-white transition-all duration-200" href="/features">AI Services</Link>
+                        <Link className="tracking-tight text-sm uppercase font-bold text-gray-400 hover:text-white transition-all duration-200" href="/features">Features</Link>
+                        <Link className="tracking-tight text-sm uppercase font-bold text-gray-400 hover:text-white transition-all duration-200" href="#">Contact</Link>
+
+                        <div className="pt-4 border-t border-[#2D2D32] flex flex-col space-y-3">
+                            <span className="text-[10px] tracking-widest uppercase text-gray-500">Login Versions</span>
+                            <Link href="/loginv1" className="tracking-tight text-sm uppercase font-bold text-gray-300 hover:text-white">
+                                <span className="text-[#DF2225] mr-2">V.1</span> Login V.1
+                            </Link>
+                            <Link href="/loginv2" className="tracking-tight text-sm uppercase font-bold text-gray-300 hover:text-white">
+                                <span className="text-[#DF2225] mr-2">V.2</span> Login V.2
+                            </Link>
+                            <Link href="/loginv3" className="tracking-tight text-sm uppercase font-bold text-gray-300 hover:text-white">
+                                <span className="text-[#DF2225] mr-2">V.3</span> Login V.3
+                            </Link>
+                        </div>
+                    </div>
+                )}
             </nav>
 
             {/* Main Content */}
@@ -99,8 +140,11 @@ export default function StitchLayout({ children }: PropsWithChildren) {
             {/* Footer */}
             <footer className="w-full border-t border-[#2D2D32] bg-[#0D0D0F]">
                 <div className="flex flex-col md:flex-row justify-between items-center px-12 py-8 w-full max-w-7xl mx-auto">
-                    <div className="text-lg font-bold text-white uppercase mb-4 md:mb-0">
-                        MARKAS Assistant
+                    <div className="flex items-center gap-3">
+                        <img src="/icon.png" alt="MARKAS Assistant Logo" className="w-8 h-8 object-contain" />
+                        <div className="text-xl font-black tracking-tighter text-white uppercase">
+                            MARKAS <span className="text-[#DF2225]">Assistant</span>
+                        </div>
                     </div>
                     <div className="flex flex-wrap justify-center gap-6 mb-4 md:mb-0">
                         <a className="text-xs tracking-widest uppercase text-gray-500 hover:text-[#DF2225] transition-all cursor-pointer" href="#">Privacy Policy</a>

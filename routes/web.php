@@ -33,24 +33,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Protected Routes (Hanya untuk user login dan terverifikasi)
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboardv1', function () {
-        return Inertia::render('admin/Dashboard', [
-            'user' => Auth::user(),
-        ]);
-    })->name('dashboard1');
-    
-    Route::get('/dashboardv2', function () {
-        return Inertia::render('dashboard', [
-            'user' => Auth::user(),
-        ]);
-    })->name('dashboard2');
+    Route::get('/dashboardv1', fn () => Inertia::render('admin/Dashboard1'))->name('dashboard1');
+    Route::get('/dashboardv2', fn () => Inertia::render('admin/Dashboard2'))->name('dashboard2');
+    Route::get('/dashboardv3', fn () => Inertia::render('admin/Dashboard3'))->name('dashboard3');
 });
-
-// Contoh route lain dengan Inertia
-Route::get('/features', function () {
-    return Inertia::render('Features');
-})->name('features');
-
-Route::get('/pricing', function () {
-    return Inertia::render('Pricing');
-})->name('pricing');

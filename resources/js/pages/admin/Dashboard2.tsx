@@ -6,7 +6,7 @@ import { SiteHeader } from "@/components/site-header"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 import { TooltipProvider } from "@/components/ui/tooltip"
 
-import data from "./data.json"
+import data from "../data.json"
 
 export default function Page() {
   return (

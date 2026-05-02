@@ -1,16 +1,9 @@
 // resources/js/Pages/Dashboard.tsx
-import { Head } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react';
 import AuthenticatedLayout from '@/layouts/AuthenticatedLayout';
 
-interface Props {
-    user: {
-        id: number;
-        name: string;
-        email: string;
-    };
-}
-
-export default function Dashboard({ user }: Props) {
+export default function Dashboard() {
+    const { auth } = usePage<{ auth: { user: { id: number; name: string; email: string } } }>().props;
     return (
         <AuthenticatedLayout>
             <Head title="Dashboard" />
@@ -20,7 +13,7 @@ export default function Dashboard({ user }: Props) {
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
                             <h2 className="text-2xl font-semibold mb-4">
-                                Welcome back, {user.name}!
+                                Welcome back, {auth.user.name}!
                             </h2>
                             <p className="text-gray-600">
                                 You're logged in to your dashboard.

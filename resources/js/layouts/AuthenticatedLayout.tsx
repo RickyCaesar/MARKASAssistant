@@ -37,7 +37,8 @@ interface User {
 export default function AuthenticatedLayout({
     children
 }: PropsWithChildren) {
-    const { user } = usePage().props as { user?: User };
+    const { auth } = usePage().props as any;
+    const user = auth?.user;
 
     return (
         <SidebarProvider>

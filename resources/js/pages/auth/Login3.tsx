@@ -151,8 +151,8 @@ export default function Login3() {
                 <div className="w-full max-w-md z-10">
                     {/* Branding Area */}
                     <div className="text-center mb-stack-lg">
-                        <div className="inline-flex items-center justify-center w-16 h-16 bg-[#1A1A1E] border border-[#2D2D32] rounded-lg mb-stack-md">
-                            <span className="material-symbols-outlined text-[#DF2225] text-4xl" data-icon="security" style={{ fontVariationSettings: "'FILL' 1" }}>security</span>
+                        <div className="inline-flex items-center justify-center w-32 h-32 mb-stack-md">
+                            <img src="/icon.png" alt="MARKAS Assistant Logo" className="size-32 object-contain" />
                         </div>
                         <h1 className="font-headline-xl text-headline-xl text-on-background tracking-tighter uppercase">
                             MARKAS <span className="text-[#DF2225]">Assistant</span>
@@ -163,7 +163,7 @@ export default function Login3() {
                         {/* Precision Header Decoration */}
                         <div className="absolute top-0 left-0 w-full h-1 bg-[#DF2225]"></div>
                         <div className="flex items-center justify-between mb-stack-lg">
-                            <span className="font-label-mono text-label-mono text-[#DF2225] bg-[#DF2225]/10 px-2 py-1 rounded border border-[#DF2225]/20">AUTH_V4.2</span>
+                            <span className="font-label-mono text-label-mono text-[#DF2225] bg-[#DF2225]/10 px-2 py-1 rounded border border-[#DF2225]/20">AUTH_V3</span>
                             <Link
                                 href="/"
                                 className="font-label-mono text-label-mono text-on-surface-variant opacity-60"

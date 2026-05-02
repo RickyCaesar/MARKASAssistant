@@ -8,8 +8,8 @@ export default function LoginPage() {
       <div className="flex flex-col gap-4 p-6 md:p-10">
         <div className="flex justify-center gap-2 md:justify-start">
           <a href="#" className="flex items-center gap-2 font-medium">
-            <div className="flex size-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
-              <HugeiconsIcon icon={LayoutBottomIcon} strokeWidth={2} className="size-4" />
+            <div className="flex size-8 items-center justify-center rounded-md">
+              <img src="/favicon.ico" alt="MARKAS Assistant Logo" className="size-8 object-contain" />
             </div>
             MARKAS Assistant
           </a>
