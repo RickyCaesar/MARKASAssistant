@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./public/icon.png" width="150" alt="MARKASAssistant Logo">
+</p>
+
 # 🚀 MARKASAssistant
 
 [![Laravel](https://img.shields.io/badge/Laravel-13.x-FF2D20?style=flat-square&logo=laravel)](https://laravel.com)
