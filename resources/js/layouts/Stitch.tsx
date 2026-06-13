@@ -51,7 +51,7 @@ export default function StitchLayout({ children }: PropsWithChildren) {
                                 onClick={() => setLoginOpen(prev => !prev)}
                                 className="flex items-center gap-2 bg-[#DF2225] text-white px-6 py-2 tracking-tight text-sm uppercase font-bold hover:bg-[#C00014] transition-all duration-200 active:scale-95"
                             >
-                                Login
+                                Sign In/Up
                                 <svg
                                     className={`w-3 h-3 transition-transform duration-200 ${loginOpen ? 'rotate-180' : ''}`}
                                     fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}
@@ -62,7 +62,7 @@ export default function StitchLayout({ children }: PropsWithChildren) {
                             {loginOpen && (
                                 <div className="absolute right-0 mt-2 w-44 bg-[#1A1A1E] border border-[#2D2D32] shadow-2xl z-50">
                                     <div className="px-3 py-1.5 border-b border-[#2D2D32]">
-                                        <span className="text-[10px] tracking-widest uppercase text-gray-500">Select Version</span>
+                                        <span className="text-[10px] tracking-widest uppercase text-gray-500">Sign In</span>
                                     </div>
                                     <Link
                                         href="/loginv1"
@@ -87,6 +87,33 @@ export default function StitchLayout({ children }: PropsWithChildren) {
                                     >
                                         <span className="text-[#DF2225] text-xs font-black">V.3</span>
                                         Login V.3
+                                    </Link>
+                                    <div className="px-3 py-1.5 border-b border-[#2D2D32]">
+                                        <span className="text-[10px] tracking-widest uppercase text-gray-500">Sign Up</span>
+                                    </div>
+                                    <Link
+                                        href="/register"
+                                        onClick={() => setLoginOpen(false)}
+                                        className="flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-tight text-gray-300 hover:bg-[#DF2225] hover:text-white transition-colors duration-150"
+                                    >
+                                        <span className="text-[#DF2225] text-xs font-black">V.1</span>
+                                        Daftar V.1
+                                    </Link>
+                                    <Link
+                                        href="/registerv2"
+                                        onClick={() => setLoginOpen(false)}
+                                        className="flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-tight text-gray-300 hover:bg-[#DF2225] hover:text-white transition-colors duration-150"
+                                    >
+                                        <span className="text-[#DF2225] text-xs font-black">V.2</span>
+                                        Daftar V.2
+                                    </Link>
+                                    <Link
+                                        href="/registerv3"
+                                        onClick={() => setLoginOpen(false)}
+                                        className="flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-tight text-gray-300 hover:bg-[#DF2225] hover:text-white transition-colors duration-150"
+                                    >
+                                        <span className="text-[#DF2225] text-xs font-black">V.3</span>
+                                        Daftar V.3
                                     </Link>
                                 </div>
                             )}

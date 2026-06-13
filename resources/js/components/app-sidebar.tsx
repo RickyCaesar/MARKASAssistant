@@ -24,8 +24,22 @@ const data = {
   },
   navMain: [
     {
-      title: "Dashboard",
-      url: "#",
+      title: "Dashboard V1",
+      url: "/dashboardv1",
+      icon: (
+        <HugeiconsIcon icon={DashboardSquare01Icon} strokeWidth={2} />
+      ),
+    },
+    {
+      title: "Dashboard V2",
+      url: "/dashboardv2",
+      icon: (
+        <HugeiconsIcon icon={DashboardSquare01Icon} strokeWidth={2} />
+      ),
+    },
+    {
+      title: "Dashboard V3",
+      url: "/dashboardv3",
       icon: (
         <HugeiconsIcon icon={DashboardSquare01Icon} strokeWidth={2} />
       ),

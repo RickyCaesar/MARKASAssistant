@@ -188,19 +188,13 @@ export default function Welcome() {
                         Bergabung dengan 450+ instansi yang menggunakan Fiscal Sentinel AI untuk menjaga presisi anggaran.
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-6">
-                        <Link
-                            href="/register"
-                            className="bg-[#DF2225] text-white font-bold text-lg px-12 py-5 uppercase tracking-widest hover:brightness-125 transition-all text-center"
-                        >
-                            Daftar Sekarang
-                        </Link>
                         {/* Login Dropdown */}
                         <div className="relative">
                             <button
                                 onClick={() => setLoginOpen(prev => !prev)}
-                                className="flex items-center gap-2 border border-white/20 text-white font-bold text-lg px-12 py-5 uppercase tracking-widest hover:bg-white/5 transition-all text-center"
+                                className="bg-[#DF2225] flex items-center gap-2 border border-white/20 text-white font-bold text-lg px-12 py-5 uppercase tracking-widest hover:bg-[#C00014] transition-all duration-200 active:scale-95"
                             >
-                                Login
+                                Sign In/Up
                                 <svg
                                     className={`w-3 h-3 transition-transform duration-200 ${loginOpen ? 'rotate-180' : ''}`}
                                     fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}
@@ -211,7 +205,7 @@ export default function Welcome() {
                             {loginOpen && (
                                 <div className="absolute right-0 mt-2 w-44 bg-[#1A1A1E] border border-[#2D2D32] shadow-2xl z-50">
                                     <div className="px-3 py-1.5 border-b border-[#2D2D32]">
-                                        <span className="text-[10px] tracking-widest uppercase text-gray-500">Select Version</span>
+                                        <span className="text-[10px] tracking-widest uppercase text-gray-500">Sign In</span>
                                     </div>
                                     <Link
                                         href="/loginv1"
@@ -236,6 +230,33 @@ export default function Welcome() {
                                     >
                                         <span className="text-[#DF2225] text-xs font-black">V.3</span>
                                         Login V.3
+                                    </Link>
+                                    <div className="px-3 py-1.5 border-b border-[#2D2D32]">
+                                        <span className="text-[10px] tracking-widest uppercase text-gray-500">Sign Up</span>
+                                    </div>
+                                    <Link
+                                        href="/register"
+                                        onClick={() => setLoginOpen(false)}
+                                        className="flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-tight text-gray-300 hover:bg-[#DF2225] hover:text-white transition-colors duration-150"
+                                    >
+                                        <span className="text-[#DF2225] text-xs font-black">V.1</span>
+                                        Daftar V.1
+                                    </Link>
+                                    <Link
+                                        href="/registerv2"
+                                        onClick={() => setLoginOpen(false)}
+                                        className="flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-tight text-gray-300 hover:bg-[#DF2225] hover:text-white transition-colors duration-150"
+                                    >
+                                        <span className="text-[#DF2225] text-xs font-black">V.2</span>
+                                        Daftar V.2
+                                    </Link>
+                                    <Link
+                                        href="/registerv3"
+                                        onClick={() => setLoginOpen(false)}
+                                        className="flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-tight text-gray-300 hover:bg-[#DF2225] hover:text-white transition-colors duration-150"
+                                    >
+                                        <span className="text-[#DF2225] text-xs font-black">V.3</span>
+                                        Daftar V.3
                                     </Link>
                                 </div>
                             )}
