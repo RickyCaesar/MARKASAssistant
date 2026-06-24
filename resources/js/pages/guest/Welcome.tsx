@@ -1,11 +1,11 @@
 import { Link } from "@inertiajs/react";
-import StitchLayout from "@/layouts/Stitch";
+import GuestLayout from "@/layouts/GuestLayout";
 import { useState } from "react";
 
 export default function Welcome() {
     const [loginOpen, setLoginOpen] = useState(false);
     return (
-        <StitchLayout>
+        <GuestLayout>
             {/* Hero Section */}
             <section className="relative min-h-[870px] flex items-center overflow-hidden px-8">
                 <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -264,6 +264,6 @@ export default function Welcome() {
                     </div>
                 </div>
             </section>
-        </StitchLayout>
+        </GuestLayout>
     );
 }

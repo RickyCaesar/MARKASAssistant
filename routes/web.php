@@ -8,8 +8,12 @@ use Inertia\Inertia;
 
 // Welcome Page
 Route::get('/', function () {
-    return Inertia::render('Welcome');
+    return Inertia::render('guest/Welcome');
 })->name('home');
+
+Route::get('/about', function () {
+    return Inertia::render('guest/About');
+})->name('about');
 
 Route::get('/loginv1', function () {
     return Inertia::render('auth/Login1');
