@@ -1,9 +1,11 @@
 // resources/js/Pages/Dashboard.tsx
-import { Head, usePage } from '@inertiajs/react';
-import AuthenticatedLayout from '@/layouts/AuthenticatedLayout';
+import { Head, usePage } from "@inertiajs/react";
+import AuthenticatedLayout from "@/layouts/AuthenticatedLayout";
 
 export default function Dashboard() {
-    const { auth } = usePage<{ auth: { user: { id: number; name: string; email: string } } }>().props;
+    const { auth } = usePage<{
+        auth: { user: { id: number; name: string; email: string } };
+    }>().props;
     return (
         <AuthenticatedLayout>
             <Head title="Dashboard" />

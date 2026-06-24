@@ -1,22 +1,23 @@
-import { createRoot } from 'react-dom/client';
-import { createInertiaApp } from '@inertiajs/react';
-import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import { createRoot } from "react-dom/client";
+import { createInertiaApp } from "@inertiajs/react";
+import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 
-import '../css/app.css';
+import "../css/app.css";
 
-const appName = import.meta.env.VITE_APP_NAME || 'MARKAS Assistant';
+const appName = import.meta.env.VITE_APP_NAME || "MARKAS Assistant";
 
 createInertiaApp({
-    title: (title) => title ? `${title} - ${appName}` : appName,
-    resolve: (name) => resolvePageComponent(
-        `./pages/${name}.tsx`,
-        import.meta.glob('./pages/**/*.tsx')
-    ) as Promise<React.ComponentType>,
+    title: (title) => (title ? `${title} - ${appName}` : appName),
+    resolve: (name) =>
+        resolvePageComponent(
+            `./pages/${name}.tsx`,
+            import.meta.glob("./pages/**/*.tsx"),
+        ) as Promise<React.ComponentType>,
     setup({ el, App, props }) {
         const root = createRoot(el);
         root.render(<App {...props} />);
     },
     progress: {
-        color: '#4B5563',
+        color: "#4B5563",
     },
 });

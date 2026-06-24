@@ -2,23 +2,36 @@ import { Head, Link, useForm } from "@inertiajs/react";
 
 export default function Login3() {
     const { data, setData, post, processing, errors } = useForm({
-        email: '',
-        password: '',
+        email: "",
+        password: "",
     });
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
-        post('/login');
+        post("/login");
     };
 
     return (
         <>
             <Head>
-                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" />
-                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" />
+                <link
+                    rel="stylesheet"
+                    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+                />
+                <link
+                    rel="stylesheet"
+                    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+                />
             </Head>
             <style>{`body { background-color: #0D0D0F; }`}</style>
-            <div className="dark font-body-md text-on-surface min-h-screen flex flex-col" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #2D2D32 1px, transparent 0)', backgroundSize: '32px 32px' }}>
+            <div
+                className="dark font-body-md text-on-surface min-h-screen flex flex-col"
+                style={{
+                    backgroundImage:
+                        "radial-gradient(circle at 2px 2px, #2D2D32 1px, transparent 0)",
+                    backgroundSize: "32px 32px",
+                }}
+            >
                 {/* ponytail: tech-pattern via inline style, fonts via Head */}
                 <main className="flex-grow flex items-center justify-center px-6 py-8 relative overflow-hidden">
                     {/* Subtle Ambient Glow */}
@@ -27,10 +40,17 @@ export default function Login3() {
                         {/* Branding Area */}
                         <div className="text-center mb-8">
                             <div className="inline-flex items-center justify-center w-32 h-32 mb-4">
-                                <img src="/icon.png" alt="MARKAS Assistant Logo" className="size-32 object-contain" />
+                                <img
+                                    src="/icon.png"
+                                    alt="MARKAS Assistant Logo"
+                                    className="size-32 object-contain"
+                                />
                             </div>
                             <h1 className="font-headline-xl text-headline-xl text-on-background tracking-tighter uppercase">
-                                MARKAS <span className="text-[#DF2225]">Assistant</span>
+                                MARKAS{" "}
+                                <span className="text-[#DF2225]">
+                                    Assistant
+                                </span>
                             </h1>
                         </div>
                         {/* Login Card */}
@@ -38,7 +58,9 @@ export default function Login3() {
                             {/* Precision Header Decoration */}
                             <div className="absolute top-0 left-0 w-full h-1 bg-[#DF2225]"></div>
                             <div className="flex items-center justify-between mb-8">
-                                <span className="font-label-mono text-label-mono text-[#DF2225] bg-[#DF2225]/10 px-2 py-1 rounded border border-[#DF2225]/20">AUTH_V3</span>
+                                <span className="font-label-mono text-label-mono text-[#DF2225] bg-[#DF2225]/10 px-2 py-1 rounded border border-[#DF2225]/20">
+                                    AUTH_V3
+                                </span>
                                 <Link
                                     href="/"
                                     className="font-label-mono text-label-mono text-on-surface-variant opacity-60"
@@ -49,40 +71,80 @@ export default function Login3() {
                             <form className="space-y-4" onSubmit={submit}>
                                 {/* Email Field */}
                                 <div className="space-y-1">
-                                    <label className="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-widest" htmlFor="email">Email</label>
+                                    <label
+                                        className="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-widest"
+                                        htmlFor="email"
+                                    >
+                                        Email
+                                    </label>
                                     <div className="relative">
-                                        <span className="material-symbols-outlined absolute left-3 top-6 -translate-y-1/2 text-on-surface-variant text-body-md" data-icon="alternate_email">alternate_email</span>
+                                        <span
+                                            className="material-symbols-outlined absolute left-3 top-6 -translate-y-1/2 text-on-surface-variant text-body-md"
+                                            data-icon="alternate_email"
+                                        >
+                                            alternate_email
+                                        </span>
                                         <input
                                             className="w-full bg-[#0D0D0F] border border-[#2D2D32] rounded text-on-surface px-10 py-3 focus:outline-none focus:border-[#DF2225] transition-colors font-body-md placeholder:text-on-tertiary-fixed-variant"
                                             id="email"
                                             placeholder="admin@example.com"
                                             type="text"
                                             value={data.email}
-                                            onChange={e => setData('email', e.target.value)}
+                                            onChange={(e) =>
+                                                setData("email", e.target.value)
+                                            }
                                             required
                                         />
                                     </div>
-                                    {errors.email && <p className="text-xs text-red-400 mt-1">{errors.email}</p>}
+                                    {errors.email && (
+                                        <p className="text-xs text-red-400 mt-1">
+                                            {errors.email}
+                                        </p>
+                                    )}
                                 </div>
                                 {/* Password Field */}
                                 <div className="space-y-1">
                                     <div className="flex justify-between items-end">
-                                        <label className="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-widest" htmlFor="password">Password</label>
-                                        <a className="font-label-mono text-data-point text-[#DF2225] hover:opacity-80 transition-opacity" href="#">Lupa Password?</a>
+                                        <label
+                                            className="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-widest"
+                                            htmlFor="password"
+                                        >
+                                            Password
+                                        </label>
+                                        <a
+                                            className="font-label-mono text-data-point text-[#DF2225] hover:opacity-80 transition-opacity"
+                                            href="#"
+                                        >
+                                            Lupa Password?
+                                        </a>
                                     </div>
                                     <div className="relative">
-                                        <span className="material-symbols-outlined absolute left-3 top-6 -translate-y-1/2 text-on-surface-variant text-body-md" data-icon="lock_open">lock_open</span>
+                                        <span
+                                            className="material-symbols-outlined absolute left-3 top-6 -translate-y-1/2 text-on-surface-variant text-body-md"
+                                            data-icon="lock_open"
+                                        >
+                                            lock_open
+                                        </span>
                                         <input
                                             className="w-full bg-[#0D0D0F] border border-[#2D2D32] rounded text-on-surface px-10 py-3 focus:outline-none focus:border-[#DF2225] transition-colors font-body-md placeholder:text-on-tertiary-fixed-variant"
                                             id="password"
                                             placeholder="••••••••••••"
                                             type="password"
                                             value={data.password}
-                                            onChange={e => setData('password', e.target.value)}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "password",
+                                                    e.target.value,
+                                                )
+                                            }
                                             required
                                         />
                                     </div>
-                                    {errors.password && <p className="text-xs text-red-400 mt-1">{errors.password}</p>}
+                                    {errors.password && (
+                                        <p className="text-xs text-red-400 mt-1">
+                                            {errors.password}
+                                        </p>
+                                    )}
                                 </div>
                                 {/* Action Button */}
                                 <button
@@ -91,7 +153,7 @@ export default function Login3() {
                                     disabled={processing}
                                 >
                                     <span className="font-headline-md uppercase tracking-tight">
-                                        {processing ? 'Memproses...' : 'Login'}
+                                        {processing ? "Memproses..." : "Login"}
                                     </span>
                                 </button>
                             </form>
@@ -99,7 +161,8 @@ export default function Login3() {
                         {/* System Footer */}
                         <div className="mt-8 text-center">
                             <p className="font-body-md text-data-point text-on-surface-variant opacity-40 uppercase tracking-[0.2em]">
-                                Restricted Access Terminal. Unauthorized entry is monitored and reported.
+                                Restricted Access Terminal. Unauthorized entry
+                                is monitored and reported.
                             </p>
                         </div>
                     </div>
@@ -125,7 +188,12 @@ export default function Login3() {
                         </div>
                     </div>
                     <div className="absolute bottom-12 right-12">
-                        <span className="material-symbols-outlined text-[200px] text-white/5 select-none" data-icon="analytics">analytics</span>
+                        <span
+                            className="material-symbols-outlined text-[200px] text-white/5 select-none"
+                            data-icon="analytics"
+                        >
+                            analytics
+                        </span>
                     </div>
                 </div>
                 {/* SideNavBar Suppression Logic: Suppressed for Login */}
