@@ -1,9 +1,6 @@
-import { Link } from "@inertiajs/react";
-import GuestLayout from "@/layouts/GuestLayout";
-import { useState } from "react";
+import GuestLayout from "@/layouts/guest/GuestLayout";
 
 export default function About() {
-    const [loginOpen, setLoginOpen] = useState(false);
     return (
         <GuestLayout>
             <section className="relative min-h-[870px] flex items-center overflow-hidden px-8">

@@ -1,7 +1,6 @@
-import { PropsWithChildren, useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { Head, Link } from "@inertiajs/react";
 
-const linkClasses = "tracking-tight text-sm uppercase font-bold text-gray-400 hover:text-white transition-all duration-200";
 const activeLinkClasses = "tracking-tight text-sm uppercase font-bold text-[#DF2225] border-b-2 border-[#DF2225] pb-1";
 const inactiveLinkClasses = "tracking-tight text-sm uppercase font-bold text-gray-400 hover:text-white transition-all duration-200";
 
@@ -33,22 +32,6 @@ const LinkComponentMobile = ({ href, children }: { href: string; children: React
     );
 };
 
-const LinkComponentMobileLogin = ({ href, children }: { href: string; children: React.ReactNode }) => {
-    return (
-        <Link href={href} className="tracking-tight text-sm uppercase font-bold text-gray-300 hover:text-white transition-all duration-200">
-            {children}
-        </Link>
-    );
-};
-
-const LinkComponentMobileRegister = ({ href, children }: { href: string; children: React.ReactNode }) => {
-    return (
-        <Link href={href} className="tracking-tight text-sm uppercase font-bold text-gray-300 hover:text-white transition-all duration-200">
-            {children}
-        </Link>
-    );
-};
-
 const LinkComponentMobileLoginVersion = ({ href, version }: { href: string; version: string }) => {
     return (
         <Link href={href} className="tracking-tight text-sm uppercase font-bold text-gray-300 hover:text-white transition-all duration-200">
@@ -65,69 +48,11 @@ const LinkComponentMobileRegisterVersion = ({ href, version }: { href: string; v
     );
 };
 
-const LinkComponentMobileLoginV1 = ({ href }: { href: string }) => {
-    return (
-        <Link href={href} className="tracking-tight text-sm uppercase font-bold text-gray-300 hover:text-white transition-all duration-200">
-            <span className="text-[#DF2225] mr-2">V.1</span> Login V.1
-        </Link>
-    );
-};
-
-const LinkComponentMobileLoginV2 = ({ href }: { href: string }) => {
-    return (
-        <Link href={href} className="tracking-tight text-sm uppercase font-bold text-gray-300 hover:text-white transition-all duration-200">
-            <span className="text-[#DF2225] mr-2">V.2</span> Login V.2
-        </Link>
-    );
-};
-
-const LinkComponentMobileLoginV3 = ({ href }: { href: string }) => {
-    return (
-        <Link href={href} className="tracking-tight text-sm uppercase font-bold text-gray-300 hover:text-white transition-all duration-200">
-            <span className="text-[#DF2225] mr-2">V.3</span> Login V.3
-        </Link>
-    );
-};
-
-const LinkComponentMobileRegisterV1 = ({ href }: { href: string }) => {
-    return (
-        <Link href={href} className="tracking-tight text-sm uppercase font-bold text-gray-300 hover:text-white transition-all duration-200">
-            <span className="text-[#DF2225] mr-2">V.1</span> Daftar V.1
-        </Link>
-    );
-};
-
-const LinkComponentMobileRegisterV2 = ({ href }: { href: string }) => {
-    return (
-        <Link href={href} className="tracking-tight text-sm uppercase font-bold text-gray-300 hover:text-white transition-all duration-200">
-            <span className="text-[#DF2225] mr-2">V.2</span> Daftar V.2
-        </Link>
-    );
-};
-
-const LinkComponentMobileRegisterV3 = ({ href }: { href: string }) => {
-    return (
-        <Link href={href} className="tracking-tight text-sm uppercase font-bold text-gray-300 hover:text-white transition-all duration-200">
-            <span className="text-[#DF2225] mr-2">V.3</span> Daftar V.3
-        </Link>
-    );
-};
-
 
 export function Header() {
     const [loginOpen, setLoginOpen] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        function handleClickOutside(e: MouseEvent) {
-            if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-                setLoginOpen(false);
-            }
-        }
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, []);
     return (
         <>
         <Head>

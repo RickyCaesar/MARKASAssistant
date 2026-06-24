@@ -1,7 +1,6 @@
-// resources/js/Layouts/GuestLayout.tsx
-import { PropsWithChildren, useState, useRef, useEffect } from 'react';
-import { Header } from '@/layouts/Header';
-import { Footer } from  '@/layouts/Footer';
+import { PropsWithChildren } from 'react';
+import { Header } from '@/layouts/guest/Header';
+import { Footer } from  '@/layouts/guest/Footer';
 
 export default function GuestLayout({ children }: PropsWithChildren) {
     return (

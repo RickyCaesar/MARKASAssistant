@@ -1,4 +1,3 @@
-// resources/js/Layouts/AuthenticatedLayout.tsx
 import { PropsWithChildren } from 'react';
 import { Link, usePage } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';

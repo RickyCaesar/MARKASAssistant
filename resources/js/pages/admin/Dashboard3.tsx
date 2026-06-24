@@ -1,126 +1,8 @@
-import { Head } from '@inertiajs/react';
+import AdminLayout from "@/layouts/admin/AdminLayout";
 
 export default function Dashboard3() {
     return (
-        <>
-            <Head>
-                <title>Fiscal Sentinel - AI Budget Integrity</title>
-                <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-                <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-            </Head>
-
-            <style dangerouslySetInnerHTML={{
-                __html: `
-                .material-symbols-outlined {
-                    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-                    display: inline-block;
-                    vertical-align: middle;
-                }
-                body {
-                    background-color: #131315;
-                }
-            `}} />
-
-            <div className="font-body-md text-on-surface bg-[#131315] min-h-screen">
-                {/* Side Navigation */}
-                <aside
-                    className="fixed left-0 top-0 h-full flex flex-col z-40 h-screen w-64 border-r border-[#2D2D32] bg-[#1A1A1E] dark:bg-[#1A1A1E] font-['Space_Grotesk'] text-sm tracking-tight">
-                    <div className="p-6">
-                        <div className="flex items-center gap-3">
-                            <span className="material-symbols-outlined text-[#DF2225] text-2xl"
-                                style={{ fontVariationSettings: "'FILL' 1" }}>security</span>
-                            <div>
-                                <h1 className="text-[#DF2225] font-bold tracking-tighter text-xl">FISCAL SENTINEL</h1>
-                                <p className="text-[10px] text-gray-500 tracking-[0.2em] uppercase">AI Budget Integrity</p>
-                            </div>
-                        </div>
-                    </div>
-                    <nav className="flex-1 mt-4">
-                        <div className="px-3 space-y-1">
-                            {/* Active Tab: Dashboard */}
-                            <a className="flex items-center gap-3 px-4 py-3 rounded-sm text-gray-400 hover:text-white transition-colors hover:bg-[#2D2D32] group"
-                                href="dashboardv1">
-                                <span className="material-symbols-outlined" data-icon="dashboard">dashboard</span>
-                                <span>Dashboard V1</span>
-                            </a>
-                            <a className="flex items-center gap-3 px-4 py-3 rounded-sm text-gray-400 hover:text-white transition-colors hover:bg-[#2D2D32] group"
-                                href="dashboardv2">
-                                <span className="material-symbols-outlined" data-icon="dashboard">dashboard</span>
-                                <span>Dashboard V2</span>
-                            </a>
-                            <a className="flex items-center gap-3 px-4 py-3 rounded-sm text-gray-400 hover:text-white transition-colors hover:bg-[#2D2D32] group"
-                                href="dashboardv3">
-                                <span className="material-symbols-outlined" data-icon="dashboard">dashboard</span>
-                                <span>Dashboard V3</span>
-                            </a>
-                            <a className="flex items-center gap-3 px-4 py-3 rounded-sm text-gray-400 hover:text-white transition-colors hover:bg-[#2D2D32] group"
-                                href="#">
-                                <span className="material-symbols-outlined" data-icon="fact_check">fact_check</span>
-                                <span>Audits</span>
-                            </a>
-                            <a className="flex items-center gap-3 px-4 py-3 rounded-sm text-gray-400 hover:text-white transition-colors hover:bg-[#2D2D32] group"
-                                href="#">
-                                <span className="material-symbols-outlined" data-icon="school">school</span>
-                                <span>Schools</span>
-                            </a>
-                            <a className="flex items-center gap-3 px-4 py-3 rounded-sm text-gray-400 hover:text-white transition-colors hover:bg-[#2D2D32] group"
-                                href="#">
-                                <span className="material-symbols-outlined" data-icon="description">description</span>
-                                <span>Reports</span>
-                            </a>
-                            <a className="flex items-center gap-3 px-4 py-3 rounded-sm text-gray-400 hover:text-white transition-colors hover:bg-[#2D2D32] group"
-                                href="#">
-                                <span className="material-symbols-outlined" data-icon="settings">settings</span>
-                                <span>Settings</span>
-                            </a>
-                        </div>
-                    </nav>
-                    <div className="p-6 border-t border-[#2D2D32]">
-                        <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded bg-[#2D2D32] flex items-center justify-center">
-                                <span className="material-symbols-outlined text-xs">shield_person</span>
-                            </div>
-                            <div className="flex-1 min-w-0">
-                                <p className="text-xs font-bold truncate">ADMIN_ALPHA</p>
-                                <p className="text-[10px] text-gray-500">Tier 1 Access</p>
-                            </div>
-                        </div>
-                    </div>
-                </aside>
-
-                {/* Top Navigation */}
-                <header
-                    className="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 border-b border-[#2D2D32] bg-[#0D0D0F]/80 backdrop-blur-md flex items-center justify-between px-8 z-30 font-['Space_Grotesk'] font-medium">
-                    <div className="flex items-center gap-4">
-                        <span className="text-xs font-label-mono text-gray-500 uppercase tracking-widest">System Status: <span
-                            className="text-green-500">Vigilant</span></span>
-                    </div>
-                    <div className="flex items-center gap-6">
-                        <div className="relative group">
-                            <span
-                                className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">search</span>
-                            <input
-                                className="bg-[#0D0D0F] border border-[#2D2D32] rounded text-sm pl-10 pr-4 py-1.5 focus:outline-none focus:border-[#DF2225] transition-colors w-64"
-                                placeholder="Search budget ID..." type="text" />
-                        </div>
-                        <div className="flex items-center gap-4 text-gray-400">
-                            <button className="hover:text-[#DF2225] transition-opacity opacity-80 hover:opacity-100">
-                                <span className="material-symbols-outlined" data-icon="notifications">notifications</span>
-                            </button>
-                            <button className="hover:text-[#DF2225] transition-opacity opacity-80 hover:opacity-100">
-                                <span className="material-symbols-outlined" data-icon="settings">settings</span>
-                            </button>
-                            <div className="w-8 h-8 rounded-full border border-[#2D2D32] overflow-hidden">
-                                <img alt="User" className="w-full h-full object-cover"
-                                    data-alt="professional portrait of a government official in a dark suit with a neutral background"
-                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMrtzMEQVgbAZQ4yN0Ln13o2rJkvk0wldK6etp8bJS16GrI9x2xNMgoYAtwKDOlhTMpTB8q57V-w2wX1T5gjTjps-H9s_cn2PZAMfc5dtACPuVXERgZevB6Y0ha6JZvZ1VNQ_7jpa-q2hmXzqjM4A0iwjjwHWZvMsLxORvMXVaXBxjMFUGRz374JvIptVe-4G0mcbGiWe2BTpjPOYBJBf4-jrnfCHG1ez9Q2I8VoFDvIUb0cbZzVmOrn04IFYgnfptcJoQS3OH0UYx" />
-                            </div>
-                        </div>
-                    </div>
-                </header>
-
-                {/* Main Content */}
-                <main className="ml-64 mt-16 p-8 min-h-screen bg-[#0D0D0F]">
+        <AdminLayout>
                     {/* Hero Stats Section */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                         {/* Total Budget Audited */}
@@ -396,7 +278,6 @@ export default function Dashboard3() {
                             </div>
                         </div>
                     </div>
-                </main>
 
                 {/* Contextual FAB */}
                 <button
@@ -404,7 +285,6 @@ export default function Dashboard3() {
                     <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>add</span>
                     <span className="sr-only">Initiate New Audit</span>
                 </button>
-            </div>
-        </>
+        </AdminLayout>
     );
 }

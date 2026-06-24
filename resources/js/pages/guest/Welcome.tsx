@@ -1,5 +1,5 @@
 import { Link } from "@inertiajs/react";
-import GuestLayout from "@/layouts/GuestLayout";
+import GuestLayout from "@/layouts/guest/GuestLayout";
 import { useState } from "react";
 
 export default function Welcome() {
