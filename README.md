@@ -16,8 +16,6 @@
 
 **MARKASAssistant** adalah aplikasi web modern dengan stack **Laravel 13.x** (Backend), **React 19 & Inertia.js** (Frontend), serta berjalan sepenuhnya di dalam lingkungan **Docker Desktop** (Nginx, PHP 8.4-FPM, MySQL 8.0).
 
----
-
 ## 📑 Daftar Isi
 
 - [Prasyarat](#-prasyarat)
@@ -29,20 +27,16 @@
 - [Kredensial Default](#-kredensial-default)
 - [Pembersihan Total](#-pembersihan-total)
 
----
-
 ## 💻 Prasyarat
 
 Pastikan software berikut sudah terinstal di sistem Anda:
 
-| Software                  | Versi Minimal | Cek Instalasi              |
-| :------------------------ | :------------ | :------------------------- |
-| **Docker Desktop**        | 4.30+         | `docker --version`         |
-| **Docker Compose**        | 2.20+         | `docker compose version`   |
-| **WSL2** *(Windows only)* | Kernel 5.10+  | `wsl --status`             |
-| **Git** *(opsional)*      | 2.30+         | `git --version`            |
-
----
+| Software                  | Versi Minimal | Cek Instalasi            |
+| :------------------------ | :------------ | :----------------------- |
+| **Docker Desktop**        | 4.30+         | `docker --version`       |
+| **Docker Compose**        | 2.20+         | `docker compose version` |
+| **WSL2** _(Windows only)_ | Kernel 5.10+  | `wsl --status`           |
+| **Git** _(opsional)_      | 2.30+         | `git --version`          |
 
 ## ⚡ Instalasi Cepat
 
@@ -52,8 +46,6 @@ Pastikan software berikut sudah terinstal di sistem Anda:
 git clone https://github.com/RickyCaesar/MARKASAssistant.git
 cd MARKASAssistant
 ```
-
----
 
 ### Step 2: Download Laravel via Docker
 
@@ -70,8 +62,6 @@ docker run --rm -v "${PWD}:/app" -w /app composer:latest create-project laravel/
 ```
 
 > ⚠️ **Catatan:** Di Windows PowerShell, gunakan `${PWD}` bukan `$(pwd)`. Perintah `$(pwd)` akan menyebabkan error `invalid reference format`.
-
----
 
 ### Step 3: Setup Docker
 
@@ -116,86 +106,80 @@ EXPOSE 5173  # Port untuk Vite dev server
 CMD ["php-fpm"]
 ```
 
----
-
 #### 📄 docker-compose.yml
 
 ```yaml
-
-version: '3.8'
+version: "3.8"
 
 services:
-  # Layanan 1: Web Server (Nginx)
-  webserver:
-    image: nginx:alpine
-    container_name: laravel_nginx_desktop
-    restart: unless-stopped
-    ports:
-      - "80:80" # Port di Komputer : Port di Container
-    volumes:
-      - .:/var/www
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-    depends_on:
-      - app
-    networks:
-      - laravel_net
+    # Layanan 1: Web Server (Nginx)
+    webserver:
+        image: nginx:alpine
+        container_name: laravel_nginx_desktop
+        restart: unless-stopped
+        ports:
+            - "80:80" # Port di Komputer : Port di Container
+        volumes:
+            - .:/var/www
+            - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+        depends_on:
+            - app
+        networks:
+            - laravel_net
 
-  # Layanan 2: PHP Processor (Aplikasi Laravel)
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: laravel_php_desktop
-    restart: unless-stopped
-    working_dir: /var/www
-    volumes:
-      - .:/var/www
-    depends_on:
-      - db
-    networks:
-      - laravel_net
+    # Layanan 2: PHP Processor (Aplikasi Laravel)
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: laravel_php_desktop
+        restart: unless-stopped
+        working_dir: /var/www
+        volumes:
+            - .:/var/www
+        depends_on:
+            - db
+        networks:
+            - laravel_net
 
-  # Layanan 3: Database (MySQL)
-  db:
-    image: mysql:8.0
-    container_name: laravel_mysql_desktop
-    restart: unless-stopped
-    environment:
-      MYSQL_DATABASE: laravel_docker_db
-      MYSQL_USER: docker_user
-      MYSQL_PASSWORD: rahasia123
-      MYSQL_ROOT_PASSWORD: root_password_kuat
-    ports:
-      - "3307:3306" # Gunakan port 3307 agar tidak bentrok dengan MySQL lokal di Windows/Mac
-    volumes:
-      - db_data_desktop:/var/lib/mysql
-    networks:
-      - laravel_net
+    # Layanan 3: Database (MySQL)
+    db:
+        image: mysql:8.0
+        container_name: laravel_mysql_desktop
+        restart: unless-stopped
+        environment:
+            MYSQL_DATABASE: laravel_docker_db
+            MYSQL_USER: docker_user
+            MYSQL_PASSWORD: rahasia123
+            MYSQL_ROOT_PASSWORD: root_password_kuat
+        ports:
+            - "3307:3306" # Gunakan port 3307 agar tidak bentrok dengan MySQL lokal di Windows/Mac
+        volumes:
+            - db_data_desktop:/var/lib/mysql
+        networks:
+            - laravel_net
 
-  # Layanan 4: Vite (Frontend Development)
-  vite:
-    image: node:20
-    container_name: laravel_vite_desktop
-    working_dir: /var/www
-    volumes:
-      - .:/var/www
-    ports:
-      - "5173:5173"
-    networks:
-      - laravel_net
-    command: sh -c "npm install && npm run dev -- --host"
+    # Layanan 4: Vite (Frontend Development)
+    vite:
+        image: node:20
+        container_name: laravel_vite_desktop
+        working_dir: /var/www
+        volumes:
+            - .:/var/www
+        ports:
+            - "5173:5173"
+        networks:
+            - laravel_net
+        command: sh -c "npm install && npm run dev -- --host"
 
 networks:
-  laravel_net:
-    driver: bridge
+    laravel_net:
+        driver: bridge
 
 volumes:
-  db_data_desktop:
-    driver: local
-
+    db_data_desktop:
+        driver: local
 ```
-
----
 
 #### 📄 nginx/default.conf
 
@@ -232,15 +216,11 @@ server {
 }
 ```
 
----
-
 ### Step 4: Jalankan Container
 
 ```bash
 docker-compose up -d --build
 ```
-
----
 
 ### Step 5: Setup Laravel
 
@@ -253,8 +233,6 @@ chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 exit
 ```
-
----
 
 ### Step 6: Konfigurasi Database
 
@@ -269,16 +247,12 @@ DB_USERNAME=docker_user
 DB_PASSWORD=rahasia123
 ```
 
----
-
 ### Step 7: Migrasi & Seed Database
 
 ```bash
 docker exec -it laravel_php_desktop php artisan migrate
 docker exec -it laravel_php_desktop php artisan db:seed
 ```
-
----
 
 ### Step 8: Akses Aplikasi
 
@@ -287,8 +261,6 @@ Buka browser dan kunjungi:
 ```
 http://localhost
 ```
-
----
 
 ## 🎨 Teknologi & Komponen Frontend
 
@@ -306,8 +278,6 @@ Aplikasi ini menggunakan ekosistem frontend yang kuat dan modern untuk menghadir
 - **Lainnya:** Vaul (Drawer dialog), Next-themes (Dark mode support).
 
 > 💡 **Tip Shadcn:** Karena menggunakan Shadcn UI, komponen terletak secara lokal di source code Anda (misal: `resources/js/components/ui/`) sehingga Anda memiliki kendali penuh untuk menyempurnakan atau mengubah fungsionalitasnya.
-
----
 
 ## 📁 Struktur Proyek
 
@@ -334,8 +304,6 @@ MARKASAssistant/
 └── README.md
 ```
 
----
-
 ## 🔧 Konfigurasi
 
 | Key             | Value             |
@@ -347,8 +315,6 @@ MARKASAssistant/
 | `DB_HOST`       | db                |
 | `DB_PORT`       | 3306              |
 | `DB_DATABASE`   | laravel_docker_db |
-
----
 
 ## 📋 Perintah Sehari-hari
 
@@ -381,22 +347,18 @@ docker exec -it laravel_php_desktop composer update             # Update depende
 docker exec -it laravel_php_desktop composer require <package>  # Tambah package baru
 ```
 
----
-
 ## 🔐 Kredensial Default
 
-| Parameter     | Nilai               |
-| ------------- | ------------------- |
-| **Host**      | `127.0.0.1`         |
-| **Port**      | `3307`              |
-| **Database**  | `laravel_docker_db` |
-| **Username**  | `docker_user`       |
-| **Password**  | `rahasia123`        |
-| **Root Pass** | `root_password_kuat`|
+| Parameter     | Nilai                |
+| ------------- | -------------------- |
+| **Host**      | `127.0.0.1`          |
+| **Port**      | `3307`               |
+| **Database**  | `laravel_docker_db`  |
+| **Username**  | `docker_user`        |
+| **Password**  | `rahasia123`         |
+| **Root Pass** | `root_password_kuat` |
 
 > ⚠️ **Penting:** Ganti semua password default sebelum deploy ke production!
-
----
 
 ## 🧹 Pembersihan Total
 
@@ -410,8 +372,6 @@ docker volume prune
 # Build ulang dari awal
 docker-compose up -d --build
 ```
-
----
 
 ## 📊 Monitoring
 
@@ -430,12 +390,8 @@ docker-compose logs -f app     # Log khusus service app
 docker-compose logs -f db      # Log khusus service database
 ```
 
----
-
 ## 📄 Lisensi
 
 Proyek ini digunakan untuk pengembangan internal.
-
----
 
 <p align="center">Dibuat dengan ❤️ Oleh Ricky C.A.T</p>
