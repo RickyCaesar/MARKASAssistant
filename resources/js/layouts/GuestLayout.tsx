@@ -1,5 +1,5 @@
 // resources/js/Layouts/GuestLayout.tsx
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useState, useRef, useEffect } from 'react';
 import { Header } from '@/layouts/Header';
 import { Footer } from  '@/layouts/Footer';
 
@@ -8,7 +8,9 @@ export default function GuestLayout({ children }: PropsWithChildren) {
         <>
             <Header />
             {/* Page Content */}
-            <main>{children}</main>
+            <main className="pt-24">
+                {children}
+            </main>
             <Footer />
         </>
     );

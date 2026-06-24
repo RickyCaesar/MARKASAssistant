@@ -1,69 +1,277 @@
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { NavigationMenu, NavigationMenuContent, NavigationMenuIndicator, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, NavigationMenuViewport } from "@/components/ui/navigation-menu";
-import { Button } from "@/components/ui/button";
-import { Link } from "@inertiajs/react";
+import { PropsWithChildren, useState, useRef, useEffect } from 'react';
+import { Head, Link } from "@inertiajs/react";
+
+const linkClasses = "tracking-tight text-sm uppercase font-bold text-gray-400 hover:text-white transition-all duration-200";
+const activeLinkClasses = "tracking-tight text-sm uppercase font-bold text-[#DF2225] border-b-2 border-[#DF2225] pb-1";
+const inactiveLinkClasses = "tracking-tight text-sm uppercase font-bold text-gray-400 hover:text-white transition-all duration-200";
+
+const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About" },
+];
+const isActiveLink = (href: string) => {
+    return window.location.pathname === href;
+}
+
+const getLinkClasses = (href: string) => {
+    return isActiveLink(href) ? activeLinkClasses : inactiveLinkClasses;
+}
+
+const LinkComponent = ({ href, children }: { href: string; children: React.ReactNode }) => {
+    return (
+        <Link href={href} className={getLinkClasses(href)}>
+            {children}
+        </Link>
+    );
+};
+
+const LinkComponentMobile = ({ href, children }: { href: string; children: React.ReactNode }) => {
+    return (
+        <Link href={href} className={getLinkClasses(href)}>
+            {children}
+        </Link>
+    );
+};
+
+const LinkComponentMobileLogin = ({ href, children }: { href: string; children: React.ReactNode }) => {
+    return (
+        <Link href={href} className="tracking-tight text-sm uppercase font-bold text-gray-300 hover:text-white transition-all duration-200">
+            {children}
+        </Link>
+    );
+};
+
+const LinkComponentMobileRegister = ({ href, children }: { href: string; children: React.ReactNode }) => {
+    return (
+        <Link href={href} className="tracking-tight text-sm uppercase font-bold text-gray-300 hover:text-white transition-all duration-200">
+            {children}
+        </Link>
+    );
+};
+
+const LinkComponentMobileLoginVersion = ({ href, version }: { href: string; version: string }) => {
+    return (
+        <Link href={href} className="tracking-tight text-sm uppercase font-bold text-gray-300 hover:text-white transition-all duration-200">
+            <span className="text-[#DF2225] mr-2">{version}</span> Login {version}
+        </Link>
+    );
+};
+
+const LinkComponentMobileRegisterVersion = ({ href, version }: { href: string; version: string }) => {
+    return (
+        <Link href={href} className="tracking-tight text-sm uppercase font-bold text-gray-300 hover:text-white transition-all duration-200">
+            <span className="text-[#DF2225] mr-2">{version}</span> Daftar {version}
+        </Link>
+    );
+};
+
+const LinkComponentMobileLoginV1 = ({ href }: { href: string }) => {
+    return (
+        <Link href={href} className="tracking-tight text-sm uppercase font-bold text-gray-300 hover:text-white transition-all duration-200">
+            <span className="text-[#DF2225] mr-2">V.1</span> Login V.1
+        </Link>
+    );
+};
+
+const LinkComponentMobileLoginV2 = ({ href }: { href: string }) => {
+    return (
+        <Link href={href} className="tracking-tight text-sm uppercase font-bold text-gray-300 hover:text-white transition-all duration-200">
+            <span className="text-[#DF2225] mr-2">V.2</span> Login V.2
+        </Link>
+    );
+};
+
+const LinkComponentMobileLoginV3 = ({ href }: { href: string }) => {
+    return (
+        <Link href={href} className="tracking-tight text-sm uppercase font-bold text-gray-300 hover:text-white transition-all duration-200">
+            <span className="text-[#DF2225] mr-2">V.3</span> Login V.3
+        </Link>
+    );
+};
+
+const LinkComponentMobileRegisterV1 = ({ href }: { href: string }) => {
+    return (
+        <Link href={href} className="tracking-tight text-sm uppercase font-bold text-gray-300 hover:text-white transition-all duration-200">
+            <span className="text-[#DF2225] mr-2">V.1</span> Daftar V.1
+        </Link>
+    );
+};
+
+const LinkComponentMobileRegisterV2 = ({ href }: { href: string }) => {
+    return (
+        <Link href={href} className="tracking-tight text-sm uppercase font-bold text-gray-300 hover:text-white transition-all duration-200">
+            <span className="text-[#DF2225] mr-2">V.2</span> Daftar V.2
+        </Link>
+    );
+};
+
+const LinkComponentMobileRegisterV3 = ({ href }: { href: string }) => {
+    return (
+        <Link href={href} className="tracking-tight text-sm uppercase font-bold text-gray-300 hover:text-white transition-all duration-200">
+            <span className="text-[#DF2225] mr-2">V.3</span> Daftar V.3
+        </Link>
+    );
+};
+
 
 export function Header() {
+    const [loginOpen, setLoginOpen] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        function handleClickOutside(e: MouseEvent) {
+            if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+                setLoginOpen(false);
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
     return (
-        <header className="bg-slate-800 py-3 sm:py-4 px-4 sm:px-10 w-full shadow-md flex items-center justify-between sticky top-0 z-50 bg-color-red">
-            {/* Header / Navigation Bar */}
-            {/* Brand Logo / Name */}
-            <div className="text-slate-100 font-bold text-lg sm:text-xl flex-shrink-0">
-                MARKAS Assistant
-            </div>
+        <>
+        <Head>
+                <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+                <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+            </Head>
+            <style>{`
+                body { background-color: #0D0D0F; color: #e5e1e4; font-family: 'Space Grotesk', sans-serif; }
+                .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+                .glass-panel { background: rgba(26, 26, 30, 0.8); backdrop-filter: blur(12px); border: 1px solid #2D2D32; }
+                .scan-line { background: linear-gradient(to bottom, transparent, #DF2225, transparent); height: 100%; width: 2px; position: absolute; left: 0; animation: scan 3s infinite linear; }
+                @keyframes scan { 0% { left: 0%; } 100% { left: 100%; } }
+            `}</style>
 
-                {/* Mobile Menu (Hamburger) */}
-                <div className="md:hidden">
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" size="icon" className="text-slate-100 hover:bg-slate-700 hover:text-white">
-                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            {/* Top Navigation Bar */}
+            <nav className="fixed top-0 w-full z-50 bg-[#0D0D0F] border-b border-[#2D2D32]">
+                <div className="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+                    <div className="flex items-center gap-3">
+                        <img src="/icon.png" alt="MARKAS Assistant Logo" className="w-8 h-8 object-contain" />
+                        <div className="text-xl font-black tracking-tighter text-white uppercase">
+                            MARKAS <span className="text-[#DF2225]">Assistant</span>
+                        </div>
+                    </div>
+                    <div className="hidden lg:flex items-center space-x-8">
+                        {navLinks.map(link => (
+                            <LinkComponent key={link.href} href={link.href}>
+                                {link.label}
+                            </LinkComponent>
+                        ))}
+                    </div>
+                    <div className="hidden lg:flex items-center space-x-4" ref={dropdownRef}>
+                        {/* Login Dropdown */}
+                        <div className="relative">
+                            <button
+                                onClick={() => setLoginOpen(prev => !prev)}
+                                className="flex items-center gap-2 bg-[#DF2225] text-white px-6 py-2 tracking-tight text-sm uppercase font-bold hover:bg-[#C00014] transition-all duration-200 active:scale-95"
+                            >
+                                Sign In/Up
+                                <svg
+                                    className={`w-3 h-3 transition-transform duration-200 ${loginOpen ? 'rotate-180' : ''}`}
+                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                                 </svg>
-                            </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" className="w-[200px] bg-slate-800 border-slate-700 text-slate-100">
-                            <DropdownMenuItem className="focus:bg-slate-700 focus:text-white cursor-pointer">
-                                Services
-                            </DropdownMenuItem>
-                            <DropdownMenuItem className="focus:bg-slate-700 focus:text-white cursor-pointer">
-                                Resources
-                            </DropdownMenuItem>
-                            <DropdownMenuItem className="focus:bg-slate-700 focus:text-white cursor-pointer">
-                                Contact
-                            </DropdownMenuItem>
-                            <div className="h-px bg-slate-700 my-1" />
-                            <DropdownMenuItem className="focus:bg-slate-700 focus:text-white cursor-pointer" asChild>
-                                <Link href="/login" className="w-full">Login</Link>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem className="focus:bg-slate-700 focus:text-white cursor-pointer" asChild>
-                                <Link href="/register" className="w-full">Register</Link>
-                            </DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                            </button>
+                            {loginOpen && (
+                                <div className="absolute right-0 mt-2 w-44 bg-[#1A1A1E] border border-[#2D2D32] shadow-2xl z-50">
+                                    <div className="px-3 py-1.5 border-b border-[#2D2D32]">
+                                        <span className="text-[10px] tracking-widest uppercase text-gray-500">Sign In</span>
+                                    </div>
+                                    <Link
+                                        href="/loginv1"
+                                        onClick={() => setLoginOpen(false)}
+                                        className="flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-tight text-gray-300 hover:bg-[#DF2225] hover:text-white transition-colors duration-150"
+                                    >
+                                        <span className="text-[#DF2225] text-xs font-black group-hover:text-white">V.1</span>
+                                        Login V.1
+                                    </Link>
+                                    <Link
+                                        href="/loginv2"
+                                        onClick={() => setLoginOpen(false)}
+                                        className="flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-tight text-gray-300 hover:bg-[#DF2225] hover:text-white transition-colors duration-150"
+                                    >
+                                        <span className="text-[#DF2225] text-xs font-black">V.2</span>
+                                        Login V.2
+                                    </Link>
+                                    <Link
+                                        href="/loginv3"
+                                        onClick={() => setLoginOpen(false)}
+                                        className="flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-tight text-gray-300 hover:bg-[#DF2225] hover:text-white transition-colors duration-150"
+                                    >
+                                        <span className="text-[#DF2225] text-xs font-black">V.3</span>
+                                        Login V.3
+                                    </Link>
+                                    <div className="px-3 py-1.5 border-b border-[#2D2D32]">
+                                        <span className="text-[10px] tracking-widest uppercase text-gray-500">Sign Up</span>
+                                    </div>
+                                    <Link
+                                        href="/register"
+                                        onClick={() => setLoginOpen(false)}
+                                        className="flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-tight text-gray-300 hover:bg-[#DF2225] hover:text-white transition-colors duration-150"
+                                    >
+                                        <span className="text-[#DF2225] text-xs font-black">V.1</span>
+                                        Daftar V.1
+                                    </Link>
+                                    <Link
+                                        href="/registerv2"
+                                        onClick={() => setLoginOpen(false)}
+                                        className="flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-tight text-gray-300 hover:bg-[#DF2225] hover:text-white transition-colors duration-150"
+                                    >
+                                        <span className="text-[#DF2225] text-xs font-black">V.2</span>
+                                        Daftar V.2
+                                    </Link>
+                                    <Link
+                                        href="/registerv3"
+                                        onClick={() => setLoginOpen(false)}
+                                        className="flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-tight text-gray-300 hover:bg-[#DF2225] hover:text-white transition-colors duration-150"
+                                    >
+                                        <span className="text-[#DF2225] text-xs font-black">V.3</span>
+                                        Daftar V.3
+                                    </Link>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Mobile Menu Toggle */}
+                    <button
+                        className="lg:hidden text-white hover:text-[#DF2225] transition-colors"
+                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                    >
+                        <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            {mobileMenuOpen ? (
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            ) : (
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                            )}
+                        </svg>
+                    </button>
                 </div>
 
-                {/* Desktop Menu */}
-                <div className="hidden md:block">
-                    <NavigationMenu>
-                        <NavigationMenuList className="flex gap-2">
-
-                            {/* Login Link */}
-                            <NavigationMenuItem>
-                                <Link href="/login" className="group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:!bg-slate-700 hover:!text-white focus:!bg-slate-700 focus:!text-white bg-transparent text-slate-100">
-                                    Login
-                                </Link>
-                            </NavigationMenuItem>
-
-                            {/* Register Link */}
-                            <NavigationMenuItem>
-                                <Link href="/register" className="group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:!bg-slate-700 hover:!text-white focus:!bg-slate-700 focus:!text-white bg-transparent text-slate-100">
-                                    Register
-                                </Link>
-                            </NavigationMenuItem>
-                        </NavigationMenuList>
-                    </NavigationMenu>
-                </div>
-            </header>
+                {/* Mobile Menu Dropdown */}
+                {mobileMenuOpen && (
+                    <div className="lg:hidden bg-[#0D0D0F] border-b border-[#2D2D32] px-8 py-4 flex flex-col space-y-4">
+                        {navLinks.map(link => (
+                            <LinkComponentMobile key={link.href} href={link.href}>
+                                {link.label}
+                            </LinkComponentMobile>
+                        ))}
+                        <div className="pt-4 border-t border-[#2D2D32] flex flex-col space-y-3">
+                            <span className="text-[10px] tracking-widest uppercase text-gray-500">Login Versions</span>
+                            <LinkComponentMobileLoginVersion href="/loginv1" version="V.1" />
+                            <LinkComponentMobileLoginVersion href="/loginv2" version="V.2" />
+                            <LinkComponentMobileLoginVersion href="/loginv3" version="V.3" />
+                        </div>
+                        <div className="pt-4 border-t border-[#2D2D32] flex flex-col space-y-3">
+                            <span className="text-[10px] tracking-widest uppercase text-gray-500">Register Versions</span>
+                            <LinkComponentMobileRegisterVersion href="/register" version="V.1" />
+                            <LinkComponentMobileRegisterVersion href="/registerv2" version="V.2" />
+                            <LinkComponentMobileRegisterVersion href="/registerv3" version="V.3" />
+                        </div>
+                    </div>
+                )}
+            </nav>
+        </>
     );
 }

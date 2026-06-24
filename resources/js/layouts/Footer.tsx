@@ -1,78 +1,25 @@
-import { Link } from "@inertiajs/react";
-
 export function Footer() {
     return (
-        <footer className="bg-slate-800 py-8 px-4 sm:px-10 w-full">
-            <div className="max-w-6xl mx-auto">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-                    {/* Brand */}
-                    <div>
-                        <h3 className="text-slate-100 font-bold text-lg mb-3">MARKAS Assistant</h3>
-                        <p className="text-slate-400 text-sm">
-                            Your ultimate assistant for modern web solutions.
-                        </p>
+        <>
+        <footer className="w-full border-t border-[#2D2D32] bg-[#0D0D0F]">
+                <div className="flex flex-col md:flex-row justify-between items-center px-12 py-8 w-full max-w-7xl mx-auto">
+                    <div className="flex items-center gap-3">
+                        <img src="/icon.png" alt="MARKAS Assistant Logo" className="w-8 h-8 object-contain" />
+                        <div className="text-xl font-black tracking-tighter text-white uppercase">
+                            MARKAS <span className="text-[#DF2225]">Assistant</span>
+                        </div>
                     </div>
-
-                    {/* Quick Links */}
-                    <div>
-                        <h4 className="text-slate-100 font-semibold text-sm uppercase tracking-wider mb-3">Quick Links</h4>
-                        <ul className="space-y-2">
-                            <li>
-                                <Link href="/" className="text-slate-400 text-sm hover:text-white transition-colors">
-                                    Home
-                                </Link>
-                            </li>
-                            <li>
-                                <a href="#" className="text-slate-400 text-sm hover:text-white transition-colors">
-                                    Services
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className="text-slate-400 text-sm hover:text-white transition-colors">
-                                    Resources
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className="text-slate-400 text-sm hover:text-white transition-colors">
-                                    Contact
-                                </a>
-                            </li>
-                        </ul>
+                    <div className="flex flex-wrap justify-center gap-6 mb-4 md:mb-0">
+                        <a className="text-xs tracking-widest uppercase text-gray-500 hover:text-[#DF2225] transition-all cursor-pointer" href="#">Privacy Policy</a>
+                        <a className="text-xs tracking-widest uppercase text-gray-500 hover:text-[#DF2225] transition-all cursor-pointer" href="#">Terms of Service</a>
+                        <a className="text-xs tracking-widest uppercase text-gray-500 hover:text-[#DF2225] transition-all cursor-pointer" href="#">Security Whitepaper</a>
+                        <a className="text-xs tracking-widest uppercase text-gray-500 hover:text-[#DF2225] transition-all cursor-pointer" href="#">Data Integrity Protocol</a>
                     </div>
-
-                    {/* Account */}
-                    <div>
-                        <h4 className="text-slate-100 font-semibold text-sm uppercase tracking-wider mb-3">Account</h4>
-                        <ul className="space-y-2">
-                            <li>
-                                <Link href="/login" className="text-slate-400 text-sm hover:text-white transition-colors">
-                                    Login
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/register" className="text-slate-400 text-sm hover:text-white transition-colors">
-                                    Register
-                                </Link>
-                            </li>
-                        </ul>
+                    <div className="text-xs tracking-widest uppercase text-gray-500">
+                        &copy; 2026 MARKAS Assistant.
                     </div>
                 </div>
-
-                {/* Divider & Copyright */}
-                <div className="border-t border-slate-700 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <p className="text-slate-500 text-xs">
-                        &copy; {new Date().getFullYear()} MARKAS Assistant. All rights reserved.
-                    </p>
-                    <div className="flex gap-4">
-                        <a href="#" className="text-slate-500 text-xs hover:text-slate-300 transition-colors">
-                            Privacy Policy
-                        </a>
-                        <a href="#" className="text-slate-500 text-xs hover:text-slate-300 transition-colors">
-                            Terms of Service
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </footer>
+            </footer>
+        </>
     );
 }

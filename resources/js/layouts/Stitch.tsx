@@ -1,20 +1,9 @@
-import { PropsWithChildren, useState, useRef, useEffect } from 'react';
-import { Head, Link } from '@inertiajs/react';
+import { PropsWithChildren } from 'react';
+import { Head } from '@inertiajs/react';
+import Header from '@/layouts/Header';
+import Footer from '@/layouts/Footer';
 
 export default function StitchLayout({ children }: PropsWithChildren) {
-    const [loginOpen, setLoginOpen] = useState(false);
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const dropdownRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        function handleClickOutside(e: MouseEvent) {
-            if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-                setLoginOpen(false);
-            }
-        }
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, []);
     return (
         <>
             <Head>
@@ -29,161 +18,13 @@ export default function StitchLayout({ children }: PropsWithChildren) {
                 @keyframes scan { 0% { left: 0%; } 100% { left: 100%; } }
             `}</style>
 
-            {/* Top Navigation Bar */}
-            <nav className="fixed top-0 w-full z-50 bg-[#0D0D0F] border-b border-[#2D2D32]">
-                <div className="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
-                    <div className="flex items-center gap-3">
-                        <img src="/icon.png" alt="MARKAS Assistant Logo" className="w-8 h-8 object-contain" />
-                        <div className="text-xl font-black tracking-tighter text-white uppercase">
-                            MARKAS <span className="text-[#DF2225]">Assistant</span>
-                        </div>
-                    </div>
-                    <div className="hidden lg:flex items-center space-x-8">
-                        <Link className="tracking-tight text-sm uppercase font-bold text-[#DF2225] border-b-2 border-[#DF2225] pb-1" href="/">Home</Link>
-                        <Link className="tracking-tight text-sm uppercase font-bold text-gray-400 hover:text-white transition-all duration-200" href="/features">AI Services</Link>
-                        <Link className="tracking-tight text-sm uppercase font-bold text-gray-400 hover:text-white transition-all duration-200" href="/features">Features</Link>
-                        <Link className="tracking-tight text-sm uppercase font-bold text-gray-400 hover:text-white transition-all duration-200" href="#">Contact</Link>
-                    </div>
-                    <div className="hidden lg:flex items-center space-x-4" ref={dropdownRef}>
-                        {/* Login Dropdown */}
-                        <div className="relative">
-                            <button
-                                onClick={() => setLoginOpen(prev => !prev)}
-                                className="flex items-center gap-2 bg-[#DF2225] text-white px-6 py-2 tracking-tight text-sm uppercase font-bold hover:bg-[#C00014] transition-all duration-200 active:scale-95"
-                            >
-                                Sign In/Up
-                                <svg
-                                    className={`w-3 h-3 transition-transform duration-200 ${loginOpen ? 'rotate-180' : ''}`}
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}
-                                >
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </button>
-                            {loginOpen && (
-                                <div className="absolute right-0 mt-2 w-44 bg-[#1A1A1E] border border-[#2D2D32] shadow-2xl z-50">
-                                    <div className="px-3 py-1.5 border-b border-[#2D2D32]">
-                                        <span className="text-[10px] tracking-widest uppercase text-gray-500">Sign In</span>
-                                    </div>
-                                    <Link
-                                        href="/loginv1"
-                                        onClick={() => setLoginOpen(false)}
-                                        className="flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-tight text-gray-300 hover:bg-[#DF2225] hover:text-white transition-colors duration-150"
-                                    >
-                                        <span className="text-[#DF2225] text-xs font-black group-hover:text-white">V.1</span>
-                                        Login V.1
-                                    </Link>
-                                    <Link
-                                        href="/loginv2"
-                                        onClick={() => setLoginOpen(false)}
-                                        className="flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-tight text-gray-300 hover:bg-[#DF2225] hover:text-white transition-colors duration-150"
-                                    >
-                                        <span className="text-[#DF2225] text-xs font-black">V.2</span>
-                                        Login V.2
-                                    </Link>
-                                    <Link
-                                        href="/loginv3"
-                                        onClick={() => setLoginOpen(false)}
-                                        className="flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-tight text-gray-300 hover:bg-[#DF2225] hover:text-white transition-colors duration-150"
-                                    >
-                                        <span className="text-[#DF2225] text-xs font-black">V.3</span>
-                                        Login V.3
-                                    </Link>
-                                    <div className="px-3 py-1.5 border-b border-[#2D2D32]">
-                                        <span className="text-[10px] tracking-widest uppercase text-gray-500">Sign Up</span>
-                                    </div>
-                                    <Link
-                                        href="/register"
-                                        onClick={() => setLoginOpen(false)}
-                                        className="flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-tight text-gray-300 hover:bg-[#DF2225] hover:text-white transition-colors duration-150"
-                                    >
-                                        <span className="text-[#DF2225] text-xs font-black">V.1</span>
-                                        Daftar V.1
-                                    </Link>
-                                    <Link
-                                        href="/registerv2"
-                                        onClick={() => setLoginOpen(false)}
-                                        className="flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-tight text-gray-300 hover:bg-[#DF2225] hover:text-white transition-colors duration-150"
-                                    >
-                                        <span className="text-[#DF2225] text-xs font-black">V.2</span>
-                                        Daftar V.2
-                                    </Link>
-                                    <Link
-                                        href="/registerv3"
-                                        onClick={() => setLoginOpen(false)}
-                                        className="flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-tight text-gray-300 hover:bg-[#DF2225] hover:text-white transition-colors duration-150"
-                                    >
-                                        <span className="text-[#DF2225] text-xs font-black">V.3</span>
-                                        Daftar V.3
-                                    </Link>
-                                </div>
-                            )}
-                        </div>
-                    </div>
+            <Header />
 
-                    {/* Mobile Menu Toggle */}
-                    <button
-                        className="lg:hidden text-white hover:text-[#DF2225] transition-colors"
-                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                    >
-                        <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            {mobileMenuOpen ? (
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                            ) : (
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                            )}
-                        </svg>
-                    </button>
-                </div>
-
-                {/* Mobile Menu Dropdown */}
-                {mobileMenuOpen && (
-                    <div className="lg:hidden bg-[#0D0D0F] border-b border-[#2D2D32] px-8 py-4 flex flex-col space-y-4">
-                        <Link className="tracking-tight text-sm uppercase font-bold text-[#DF2225]" href="/">Home</Link>
-                        <Link className="tracking-tight text-sm uppercase font-bold text-gray-400 hover:text-white transition-all duration-200" href="/features">AI Services</Link>
-                        <Link className="tracking-tight text-sm uppercase font-bold text-gray-400 hover:text-white transition-all duration-200" href="/features">Features</Link>
-                        <Link className="tracking-tight text-sm uppercase font-bold text-gray-400 hover:text-white transition-all duration-200" href="#">Contact</Link>
-
-                        <div className="pt-4 border-t border-[#2D2D32] flex flex-col space-y-3">
-                            <span className="text-[10px] tracking-widest uppercase text-gray-500">Login Versions</span>
-                            <Link href="/loginv1" className="tracking-tight text-sm uppercase font-bold text-gray-300 hover:text-white">
-                                <span className="text-[#DF2225] mr-2">V.1</span> Login V.1
-                            </Link>
-                            <Link href="/loginv2" className="tracking-tight text-sm uppercase font-bold text-gray-300 hover:text-white">
-                                <span className="text-[#DF2225] mr-2">V.2</span> Login V.2
-                            </Link>
-                            <Link href="/loginv3" className="tracking-tight text-sm uppercase font-bold text-gray-300 hover:text-white">
-                                <span className="text-[#DF2225] mr-2">V.3</span> Login V.3
-                            </Link>
-                        </div>
-                    </div>
-                )}
-            </nav>
-
-            {/* Main Content */}
             <main className="pt-24">
                 {children}
             </main>
 
-            {/* Footer */}
-            <footer className="w-full border-t border-[#2D2D32] bg-[#0D0D0F]">
-                <div className="flex flex-col md:flex-row justify-between items-center px-12 py-8 w-full max-w-7xl mx-auto">
-                    <div className="flex items-center gap-3">
-                        <img src="/icon.png" alt="MARKAS Assistant Logo" className="w-8 h-8 object-contain" />
-                        <div className="text-xl font-black tracking-tighter text-white uppercase">
-                            MARKAS <span className="text-[#DF2225]">Assistant</span>
-                        </div>
-                    </div>
-                    <div className="flex flex-wrap justify-center gap-6 mb-4 md:mb-0">
-                        <a className="text-xs tracking-widest uppercase text-gray-500 hover:text-[#DF2225] transition-all cursor-pointer" href="#">Privacy Policy</a>
-                        <a className="text-xs tracking-widest uppercase text-gray-500 hover:text-[#DF2225] transition-all cursor-pointer" href="#">Terms of Service</a>
-                        <a className="text-xs tracking-widest uppercase text-gray-500 hover:text-[#DF2225] transition-all cursor-pointer" href="#">Security Whitepaper</a>
-                        <a className="text-xs tracking-widest uppercase text-gray-500 hover:text-[#DF2225] transition-all cursor-pointer" href="#">Data Integrity Protocol</a>
-                    </div>
-                    <div className="text-xs tracking-widest uppercase text-gray-500">
-                        &copy; 2026 MARKAS Assistant.
-                    </div>
-                </div>
-            </footer>
+            <Footer />
         </>
     );
 }
