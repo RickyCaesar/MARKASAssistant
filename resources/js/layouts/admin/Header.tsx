@@ -1,5 +1,15 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Head, Link, usePage } from "@inertiajs/react";
+import { Button } from "@/components/ui/button";
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogFooter,
+    DialogTitle,
+    DialogDescription,
+    DialogClose,
+} from "@/components/ui/dialog";
 
 const activeLinkClasses =
     "flex items-center gap-3 px-4 py-3 rounded-sm transition-all duration-150 active:scale-90 text-[#DF2225] bg-[#DF2225]/10 border-r-2 border-[#DF2225] font-bold";
@@ -10,7 +20,7 @@ const navLinks = [
     { href: "/dashboardv1", label: "Dashboard V1" },
     { href: "/dashboardv2", label: "Dashboard V2" },
     { href: "/dashboardv3", label: "Dashboard V3" },
-    { href: "/rkas", label: "RKAS" },
+    { href: "/raporpendidikan", label: "Rapor Pendidikan" },
 ];
 const isActiveLink = (href: string) => {
     return window.location.pathname === href;
@@ -34,20 +44,6 @@ const LinkComponent = ({
     );
 };
 
-const LinkComponentMobile = ({
-    href,
-    children,
-}: {
-    href: string;
-    children: React.ReactNode;
-}) => {
-    return (
-        <Link href={href} className={getLinkClasses(href)}>
-            {children}
-        </Link>
-    );
-};
-
 interface User {
     id: number;
     name: string;
@@ -55,9 +51,9 @@ interface User {
 }
 
 export function Header() {
-    const [loginOpen, setLoginOpen] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const dropdownRef = useRef<HTMLDivElement>(null);
+    const [settingsOpen, setSettingsOpen] = useState(false);
+    const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
     const { auth } = usePage().props as any;
     const user = auth?.user;
     return (
@@ -88,19 +84,26 @@ export function Header() {
                 }}
             />
 
+            {/* ponytail: mobile overlay */}
+            {mobileMenuOpen && (
+                <div className="fixed inset-0 bg-black/50 z-30 md:hidden" onClick={() => setMobileMenuOpen(false)} />
+            )}
+
             {/* Side Navigation */}
-            <aside className="fixed left-0 top-0 h-full flex flex-col z-40 h-screen w-64 border-r border-[#2D2D32] bg-[#1A1A1E] dark:bg-[#1A1A1E] font-['Space_Grotesk'] text-sm tracking-tight">
+            <aside className={`fixed left-0 top-0 h-full flex flex-col z-40 w-64 border-r border-[#2D2D32] bg-[#1A1A1E] font-['Space_Grotesk'] text-sm tracking-tight transition-transform duration-300 ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0`}>
                 <div className="p-6">
                     <div className="flex items-center gap-3">
-                        <span
-                            className="material-symbols-outlined text-[#DF2225] text-2xl"
-                            style={{ fontVariationSettings: "'FILL' 1" }}
-                        >
-                            security
-                        </span>
+                        <img
+                            src="/icon.png"
+                            alt="MARKAS Assistant Logo"
+                            className="material-symbols-outlined text-[#DF2225] text-2xl w-10 h-10 object-contain"
+                        />
                         <div>
                             <h1 className="text-[#DF2225] font-bold tracking-tighter text-xl">
-                                FISCAL SENTINEL
+                                MARKAS
+                                <span className="text-[#DF2225]">
+                                    Assistant
+                                </span>
                             </h1>
                             <p className="text-[10px] text-gray-500 tracking-[0.2em] uppercase">
                                 AI Budget Integrity
@@ -138,41 +141,34 @@ export function Header() {
             </aside>
 
             {/* Top Navigation */}
-            <header className="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 border-b border-[#2D2D32] bg-[#0D0D0F]/80 backdrop-blur-md flex items-center justify-between px-8 z-30 font-['Space_Grotesk'] font-medium">
+            <header className="fixed top-0 right-0 w-full md:w-[calc(100%-16rem)] h-16 border-b border-[#2D2D32] bg-[#0D0D0F]/80 backdrop-blur-md flex items-center justify-between px-4 md:px-8 z-30 font-['Space_Grotesk'] font-medium">
                 <div className="flex items-center gap-4">
+                    <button className="md:hidden text-gray-400 hover:text-white" onClick={() => setMobileMenuOpen(true)}>
+                        <span className="material-symbols-outlined">menu</span>
+                    </button>
                     <span className="text-xs font-label-mono text-gray-500 uppercase tracking-widest">
                         System Status:{" "}
                         <span className="text-green-500">Vigilant</span>
                     </span>
                 </div>
                 <div className="flex items-center gap-6">
-                    <div className="relative group">
-                        <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-                            search
-                        </span>
-                        <input
-                            className="bg-[#0D0D0F] border border-[#2D2D32] rounded text-sm pl-10 pr-4 py-1.5 focus:outline-none focus:border-[#DF2225] transition-colors w-64"
-                            placeholder="Search budget ID..."
-                            type="text"
-                        />
-                    </div>
                     <div className="flex items-center gap-4 text-gray-400">
-                        <button className="hover:text-[#DF2225] transition-opacity opacity-80 hover:opacity-100">
-                            <span
-                                className="material-symbols-outlined"
-                                data-icon="notifications"
-                            >
-                                notifications
-                            </span>
-                        </button>
-                        <button className="hover:text-[#DF2225] transition-opacity opacity-80 hover:opacity-100">
-                            <span
-                                className="material-symbols-outlined"
-                                data-icon="settings"
-                            >
-                                settings
-                            </span>
-                        </button>
+                        <div className="relative">
+                            <button className="hover:text-[#DF2225] transition-opacity opacity-80 hover:opacity-100" onClick={() => setSettingsOpen(!settingsOpen)}>
+                                <span className="material-symbols-outlined">settings</span>
+                            </button>
+                            {settingsOpen && (
+                                <>
+                                    <div className="fixed inset-0 z-40" onClick={() => setSettingsOpen(false)} />
+                                    <div className="absolute right-0 mt-2 w-48 rounded-md border border-[#2D2D32] bg-[#1A1A1E] shadow-lg z-50 py-1 font-['Space_Grotesk'] text-sm">
+                                        <Link href="/profile" className="block px-4 py-2 text-gray-300 hover:bg-[#2D2D32] hover:text-white">Profil</Link>
+                                        <Link href="/settings" className="block px-4 py-2 text-gray-300 hover:bg-[#2D2D32] hover:text-white">Pengaturan Akun</Link>
+                                        <hr className="border-[#2D2D32] my-1" />
+                                        <button className="block w-full text-left px-4 py-2 text-red-400 hover:bg-[#2D2D32] hover:text-red-300" onClick={() => { setSettingsOpen(false); setLogoutDialogOpen(true); }}>Logout</button>
+                                    </div>
+                                </>
+                            )}
+                        </div>
                         <div className="w-8 h-8 rounded-full border border-[#2D2D32] overflow-hidden">
                             <img
                                 alt="User"
@@ -184,6 +180,20 @@ export function Header() {
                     </div>
                 </div>
             </header>
+            <Dialog open={logoutDialogOpen} onOpenChange={setLogoutDialogOpen}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Konfirmasi Logout</DialogTitle>
+                        <DialogDescription>Apakah Anda yakin ingin keluar? Anda harus login kembali untuk mengakses dashboard.</DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter>
+                        <DialogClose asChild>
+                            <Button variant="outline">Batal</Button>
+                        </DialogClose>
+                        <Link href="/logout" method="post" as="button" className="bg-red-600 text-white px-4 py-2 text-sm rounded-md hover:bg-red-700 font-medium transition-colors">Ya, Keluar</Link>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
         </>
     );
 }

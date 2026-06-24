@@ -10,7 +10,7 @@ export default function adminLayout({ children }: PropsWithChildren) {
                 <Header />
 
                 {/* Area Konten Utama */}
-                <main className="ml-64 mt-16 p-8 min-h-screen bg-[#0D0D0F]">
+                <main className="ml-0 md:ml-64 mt-16 p-4 md:p-8 min-h-screen bg-[#0D0D0F]">
                     {children}
                 </main>
             </div>
