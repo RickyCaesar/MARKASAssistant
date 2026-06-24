@@ -116,7 +116,7 @@ export function Header() {
                             className="w-8 h-8 object-contain"
                         />
                         <div className="text-xl font-black tracking-tighter text-white uppercase">
-                            MARKAS{" "}
+                            MARKAS
                             <span className="text-[#DF2225]">Assistant</span>
                         </div>
                     </div>

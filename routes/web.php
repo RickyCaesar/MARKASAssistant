@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RaporpendidikanController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -40,4 +41,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboardv1', fn () => Inertia::render('admin/Dashboard1'))->name('dashboard1');
     Route::get('/dashboardv2', fn () => Inertia::render('admin/Dashboard2'))->name('dashboard2');
     Route::get('/dashboardv3', fn () => Inertia::render('admin/Dashboard3'))->name('dashboard3');
+    Route::get('/raporpendidikan', [RaporpendidikanController::class, 'index'])->name('raporpendidikan');
 });
