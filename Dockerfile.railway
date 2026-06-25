@@ -1,0 +1,30 @@
+# Gunakan image resmi PHP 8.4
+FROM php:8.4-cli
+
+# Install dependensi sistem dan Node.js (untuk React/Vite)
+RUN apt-get update && apt-get install -y \
+    git curl zip unzip libpng-dev libonig-dev libxml2-dev \
+    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs
+
+# Install ekstensi PHP yang dibutuhkan Laravel
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+
+# Install Composer versi terbaru
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Atur direktori kerja
+WORKDIR /app
+
+# Copy seluruh kode aplikasi Anda ke dalam container
+COPY . .
+
+# Install dependensi PHP & Node, lalu build aset frontend
+RUN composer install --optimize-autoloader --no-dev
+RUN npm install
+RUN npm run build
+
+# Jalankan migrasi database otomatis & jalankan server Laravel pada port Railway
+CMD sh -c "php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT"
+
+RUN php artisan config:clear
