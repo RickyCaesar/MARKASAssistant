@@ -1,5 +1,5 @@
 import AdminLayout from "@/layouts/admin/AdminLayout";
-import Dialog from "@/components/ui/dialog2";
+import Dialog from "@/components/die_dump/dialog2";
 import { useState } from "react";
 
 export default function RaporPendidikan() {
