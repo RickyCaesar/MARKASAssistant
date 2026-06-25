@@ -25,4 +25,4 @@ RUN npm install
 RUN npm run build
 
 # Jalankan migrasi database otomatis & jalankan server Laravel pada port Railway
-CMD sh -c "php artisan migrate:fresh --seed && php artisan serve --host=0.0.0.0 --port=$PORT"
+CMD sh -c "php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT"
