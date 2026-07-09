@@ -1,15 +1,19 @@
 import { useEffect } from "react";
+import { Link } from "@inertiajs/react";
 
-interface DialogProps {
+type Props = {
     isOpen: boolean;
     onClose: () => void;
     title: string;
     message: string;
-}
+    icon: string;
+    link: null | string;
+    type: "redirect" | "post" | "get" | "delete";
+};
 
-const Dialog = ({ isOpen, onClose, title, message }: DialogProps) => {
+const Dialog = (props: Props) => {
     useEffect(() => {
-        if (!isOpen) return;
+        if (!props.isOpen) return;
         const body = document.body;
         const html = document.documentElement;
         body.style.overflow = "hidden";
@@ -18,46 +22,47 @@ const Dialog = ({ isOpen, onClose, title, message }: DialogProps) => {
             body.style.overflow = "";
             html.style.overflow = "";
         };
-    }, [isOpen]);
+    }, [props.isOpen]);
 
-    if (!isOpen) return null;
+    if (!props.isOpen) return null;
 
     return (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm transition-opacity duration-300"
-             onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
-            <div className="relative w-full max-w-md bg-surface-container-lowest border border-outline-variant rounded shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300 p-4">
-                <div className="p-stack-lg">
+             onClick={(e) => { if (e.target === e.currentTarget) props.onClose(); }}>
+            <div className="relative w-full max-w-md bg-surface-container-lowest border border-outline-variant rounded shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
+                <div className="p-stack-lg m-5">
                     <div className="flex flex-col items-center text-center mb-8">
                         <div className="w-16 h-16 bg-primary-container/10 border border-primary-container rounded-full flex items-center justify-center mb-4">
                             <span
                                 className="material-symbols-outlined text-primary-container text-4xl"
                                 data-weight="fill"
                             >
-                                warning
+                                {props.icon}
                             </span>
                         </div>
                         <h2 className="font-headline-md text-headline-md text-on-surface mb-2">
-                            {title}
+                            {props.title}
                         </h2>
                         <p className="font-body-md text-body-md text-on-surface-variant max-w-[280px]">
-                            {message}
+                            {props.message}
                         </p>
                     </div>
                     <div className="flex flex-col gap-3">
-                        <button
+                        <Link
                             className="w-full h-12 bg-primary-container text-on-primary-container font-headline-md text-body-lg font-bold flex items-center justify-center gap-2 hover:brightness-110 active:scale-[0.98] transition-all"
-                            id="terminate-btn"
+                            as="button"
+                            method={
+                                props.type === "redirect" ? "get" : props.type
+                            }
+                            href={props.link || "#"}
                         >
-                            <span className="material-symbols-outlined text-xl">
-                                power_settings_new
-                            </span>
-                            Terminate Session
-                        </button>
+                            Yes
+                        </Link>
                         <button
                             className="w-full h-12 bg-transparent border border-outline-variant text-on-surface font-body-lg hover:bg-surface-variant transition-colors flex items-center justify-center"
-                            onClick={onClose}
+                            onClick={() => props.onClose()}
                         >
-                            Cancel
+                            No
                         </button>
                     </div>
                 </div>
@@ -67,5 +72,3 @@ const Dialog = ({ isOpen, onClose, title, message }: DialogProps) => {
 };
 
 export default Dialog;
-
-

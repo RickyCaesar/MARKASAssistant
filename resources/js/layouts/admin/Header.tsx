@@ -1,15 +1,6 @@
 import { useState } from "react";
 import { Head, Link, usePage } from "@inertiajs/react";
-import { Button } from "@/components/ui/button";
-import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogFooter,
-    DialogTitle,
-    DialogDescription,
-    DialogClose,
-} from "@/components/ui/dialog";
+import Dialog from "@/components/die_dump/dialog2";
 
 const activeLinkClasses =
     "flex items-center gap-3 px-4 py-3 rounded-sm transition-all duration-150 active:scale-90 text-[#DF2225] bg-[#DF2225]/10 border-r-2 border-[#DF2225] font-bold";
@@ -53,7 +44,7 @@ interface User {
 export function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [settingsOpen, setSettingsOpen] = useState(false);
-    const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
+    const [IsLogoutDialogOpen, setLogoutDialogOpen] = useState(false);
     const { auth } = usePage().props as any;
     const user = auth?.user;
     return (
@@ -86,11 +77,16 @@ export function Header() {
 
             {/* ponytail: mobile overlay */}
             {mobileMenuOpen && (
-                <div className="fixed inset-0 bg-black/50 z-30 md:hidden" onClick={() => setMobileMenuOpen(false)} />
+                <div
+                    className="fixed inset-0 bg-black/50 z-30 md:hidden"
+                    onClick={() => setMobileMenuOpen(false)}
+                />
             )}
 
             {/* Side Navigation */}
-            <aside className={`fixed left-0 top-0 h-full flex flex-col z-40 w-64 border-r border-[#2D2D32] bg-[#1A1A1E] font-['Space_Grotesk'] text-sm tracking-tight transition-transform duration-300 ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0`}>
+            <aside
+                className={`fixed left-0 top-0 h-full flex flex-col z-40 w-64 border-r border-[#2D2D32] bg-[#1A1A1E] font-['Space_Grotesk'] text-sm tracking-tight transition-transform duration-300 ${mobileMenuOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
+            >
                 <div className="p-6">
                     <div className="flex items-center gap-3">
                         <img
@@ -99,7 +95,7 @@ export function Header() {
                             className="material-symbols-outlined text-[#DF2225] text-2xl w-10 h-10 object-contain"
                         />
                         <div>
-                            <h1 className="text-[#DF2225] font-bold tracking-tighter text-xl">
+                            <h1 className="text-white font-bold tracking-tighter text-xl">
                                 MARKAS
                                 <span className="text-[#DF2225]">
                                     Assistant
@@ -143,7 +139,10 @@ export function Header() {
             {/* Top Navigation */}
             <header className="fixed top-0 right-0 w-full md:w-[calc(100%-16rem)] h-16 border-b border-[#2D2D32] bg-[#0D0D0F]/80 backdrop-blur-md flex items-center justify-between px-4 md:px-8 z-30 font-['Space_Grotesk'] font-medium">
                 <div className="flex items-center gap-4">
-                    <button className="md:hidden text-gray-400 hover:text-white" onClick={() => setMobileMenuOpen(true)}>
+                    <button
+                        className="md:hidden text-gray-400 hover:text-white"
+                        onClick={() => setMobileMenuOpen(true)}
+                    >
                         <span className="material-symbols-outlined">menu</span>
                     </button>
                     <span className="text-xs font-label-mono text-gray-500 uppercase tracking-widest">
@@ -154,17 +153,42 @@ export function Header() {
                 <div className="flex items-center gap-6">
                     <div className="flex items-center gap-4 text-gray-400">
                         <div className="relative">
-                            <button className="hover:text-[#DF2225] transition-opacity opacity-80 hover:opacity-100" onClick={() => setSettingsOpen(!settingsOpen)}>
-                                <span className="material-symbols-outlined">settings</span>
+                            <button
+                                className="hover:text-[#DF2225] transition-opacity opacity-80 hover:opacity-100"
+                                onClick={() => setSettingsOpen(!settingsOpen)}
+                            >
+                                <span className="material-symbols-outlined">
+                                    settings
+                                </span>
                             </button>
                             {settingsOpen && (
                                 <>
-                                    <div className="fixed inset-0 z-40" onClick={() => setSettingsOpen(false)} />
+                                    <div
+                                        className="fixed inset-0 z-40"
+                                        onClick={() => setSettingsOpen(false)}
+                                    />
                                     <div className="absolute right-0 mt-2 w-48 rounded-md border border-[#2D2D32] bg-[#1A1A1E] shadow-lg z-50 py-1 font-['Space_Grotesk'] text-sm">
-                                        <Link href="/profile" className="block px-4 py-2 text-gray-300 hover:bg-[#2D2D32] hover:text-white">Profil</Link>
-                                        <Link href="/settings" className="block px-4 py-2 text-gray-300 hover:bg-[#2D2D32] hover:text-white">Pengaturan Akun</Link>
+                                        <Link
+                                            href="/profile"
+                                            className="block px-4 py-2 text-gray-300 hover:bg-[#2D2D32] hover:text-white"
+                                        >
+                                            Profil
+                                        </Link>
+                                        <Link
+                                            href="/settings"
+                                            className="block px-4 py-2 text-gray-300 hover:bg-[#2D2D32] hover:text-white"
+                                        >
+                                            Pengaturan Akun
+                                        </Link>
                                         <hr className="border-[#2D2D32] my-1" />
-                                        <button className="block w-full text-left px-4 py-2 text-red-400 hover:bg-[#2D2D32] hover:text-red-300" onClick={() => { setSettingsOpen(false); setLogoutDialogOpen(true); }}>Logout</button>
+                                        <button
+                                            className="block w-full text-left px-4 py-2 text-red-400 hover:bg-[#2D2D32] hover:text-red-300"
+                                            onClick={() =>
+                                                setLogoutDialogOpen(true)
+                                            }
+                                        >
+                                            Logout
+                                        </button>
                                     </div>
                                 </>
                             )}
@@ -180,20 +204,15 @@ export function Header() {
                     </div>
                 </div>
             </header>
-            <Dialog open={logoutDialogOpen} onOpenChange={setLogoutDialogOpen}>
-                <DialogContent>
-                    <DialogHeader>
-                        <DialogTitle>Konfirmasi Logout</DialogTitle>
-                        <DialogDescription>Apakah Anda yakin ingin keluar? Anda harus login kembali untuk mengakses dashboard.</DialogDescription>
-                    </DialogHeader>
-                    <DialogFooter>
-                        <DialogClose asChild>
-                            <Button variant="outline">Batal</Button>
-                        </DialogClose>
-                        <Link href="/logout" method="post" as="button" className="bg-red-600 text-white px-4 py-2 text-sm rounded-md hover:bg-red-700 font-medium transition-colors">Ya, Keluar</Link>
-                    </DialogFooter>
-                </DialogContent>
-            </Dialog>
+            <Dialog
+                isOpen={IsLogoutDialogOpen}
+                onClose={() => setLogoutDialogOpen(false)}
+                icon="power_settings_new"
+                title="Confirm Logout"
+                link="/logout"
+                message="Are you sure you want to terminate your secure session? All unsaved audit parameters will be lost."
+                type="post"
+            />
         </>
     );
 }

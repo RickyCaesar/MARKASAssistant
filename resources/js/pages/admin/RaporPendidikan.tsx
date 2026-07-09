@@ -25,9 +25,12 @@ export default function RaporPendidikan() {
                 </div>
                 <Dialog
                     isOpen={isDialogOpen}
+                    icon="info"
                     onClose={() => setIsDialogOpen(false)}
+                    link="/dashboardv3"
                     title="Informasi Rapor Pendidikan"
                     message="Ini adalah informasi terkait rapor pendidikan."
+                    type="redirect"
                 />
             </AdminLayout>
         </>
