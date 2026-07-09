@@ -27,8 +27,12 @@ const Dialog = (props: Props) => {
     if (!props.isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm transition-opacity duration-300"
-             onClick={(e) => { if (e.target === e.currentTarget) props.onClose(); }}>
+        <div
+            className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm transition-opacity duration-300"
+            onClick={(e) => {
+                if (e.target === e.currentTarget) props.onClose();
+            }}
+        >
             <div className="relative w-full max-w-md bg-surface-container-lowest border border-outline-variant rounded shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
                 <div className="p-stack-lg m-5">
                     <div className="flex flex-col items-center text-center mb-8">
@@ -48,16 +52,26 @@ const Dialog = (props: Props) => {
                         </p>
                     </div>
                     <div className="flex flex-col gap-3">
-                        <Link
-                            className="w-full h-12 bg-primary-container text-on-primary-container font-headline-md text-body-lg font-bold flex items-center justify-center gap-2 hover:brightness-110 active:scale-[0.98] transition-all"
-                            as="button"
-                            method={
-                                props.type === "redirect" ? "get" : props.type
-                            }
-                            href={props.link || "#"}
-                        >
-                            Yes
-                        </Link>
+                        {props.type === "redirect" ? (
+                            <a
+                                href={props.link || "#"}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-full h-12 bg-primary-container text-on-primary-container font-headline-md text-body-lg font-bold flex items-center justify-center gap-2 hover:brightness-110 active:scale-[0.98] transition-all"
+                                onClick={() => props.onClose()}
+                            >
+                                Yes
+                            </a>
+                        ) : (
+                            <Link
+                                className="w-full h-12 bg-primary-container text-on-primary-container font-headline-md text-body-lg font-bold flex items-center justify-center gap-2 hover:brightness-110 active:scale-[0.98] transition-all"
+                                as="button"
+                                method="post"
+                                href={props.link || "#"}
+                            >
+                                Yes
+                            </Link>
+                        )}
                         <button
                             className="w-full h-12 bg-transparent border border-outline-variant text-on-surface font-body-lg hover:bg-surface-variant transition-colors flex items-center justify-center"
                             onClick={() => props.onClose()}

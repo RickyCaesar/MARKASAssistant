@@ -27,7 +27,7 @@ export default function RaporPendidikan() {
                     isOpen={isDialogOpen}
                     icon="info"
                     onClose={() => setIsDialogOpen(false)}
-                    link="/dashboardv3"
+                    link="/raporpendidikan"
                     title="Informasi Rapor Pendidikan"
                     message="Ini adalah informasi terkait rapor pendidikan."
                     type="redirect"

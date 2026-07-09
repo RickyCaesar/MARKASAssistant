@@ -208,9 +208,9 @@ export function Header() {
                 isOpen={IsLogoutDialogOpen}
                 onClose={() => setLogoutDialogOpen(false)}
                 icon="power_settings_new"
-                title="Confirm Logout"
+                title="Logout"
                 link="/logout"
-                message="Are you sure you want to terminate your secure session? All unsaved audit parameters will be lost."
+                message="Yakin ingin keluar sekarang?"
                 type="post"
             />
         </>
